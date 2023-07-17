@@ -38,6 +38,7 @@ export const animeList = createStyles({
     width: '100%',
     height: '180px',
     borderRadius: '10px',
+    cursor: 'pointer',
     [mq[0]]: {
       height: '160px',
     },
