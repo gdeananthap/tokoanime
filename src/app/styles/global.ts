@@ -1,7 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { createStyles } from './createStyles'
-import { colours} from './colours'
+import { colours } from './colours'
+import { mq } from './mediaqueries'
 
 export const global = createStyles({
   body: {
@@ -15,5 +16,91 @@ export const global = createStyles({
     minHeight: '100%',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-between',
   },
+  mainContainer: {
+    backgroundColor: colours.black[70],
+    minWidth: '100%',
+    minHeight: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  pageContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '24px 16px',
+    width: 'calc(100% - 32px)',
+    [mq[2]]: {
+      padding: '24px 20px',
+      width: 'calc(100% - 40px)',
+    },
+    [mq[3]]: {
+      padding: '24px',
+      width: 'calc(100% - 48px)',
+    }
+  },
+  h1: {
+    fontSize: '24px',
+    fontWeight: '800',
+    color: colours.white[0],
+    margin: 0,
+    [mq[2]]: {
+      fontSize: '40px',
+    }
+  },
+  h2: {
+
+  },
+  h3: {
+    fontSize: '12px',
+    fontWeight: '800',
+    color: colours.white[0],
+    margin: 0,
+    [mq[2]]: {
+      fontSize: '16px',
+    }
+  },
+  h4: {
+    fontSize: '10px',
+    fontWeight: '400',
+    color: colours.white[0],
+    margin: 0,
+    [mq[2]]: {
+      fontSize: '12px',
+    }
+  },
+  primaryButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: '12px',
+    backgroundColor: colours.primary,
+    padding: '8px',
+    border: '1px solid',
+    borderColor: colours.primary,
+    borderRadius: '5px',
+    cursor: 'pointer',
+    [mq[2]]: {
+      padding: '8px 16px',
+    },
+  },
+  primaryButtonTitle: {
+    fontSize: '12px',
+    fontWeight: '800',
+    color: colours.white[0],
+    margin: 0,
+    [mq[2]]: {
+      fontSize: '16px',
+    }
+  },
+  primaryButtonIcon: {
+    height: '16px',
+    width: '16px',
+    color: colours.white[0],
+    [mq[2]]: {
+      height: '20px',
+      width: '20px',
+    }
+  }
 })

@@ -14,7 +14,7 @@ export const footer = createStyles({
     width: 'calc(100% - 32px)',
     borderTop: '2px solid',
     borderTopColor: colours.black[50],
-    position: 'absolute',
+    position: 'relative',
     bottom: 0,
     [mq[2]]: {
       padding: '8px 20px',
