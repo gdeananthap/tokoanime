@@ -40,6 +40,13 @@ export const global = createStyles({
       width: 'calc(100% - 48px)',
     }
   },
+  errorContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%',
+    marginTop: '24px',
+  },
   h1: {
     fontSize: '20px',
     fontWeight: '800',
@@ -72,6 +79,37 @@ export const global = createStyles({
     [mq[2]]: {
       fontSize: '12px',
     }
+  },
+  errorTitle: {
+    fontSize: '20px',
+    fontWeight: '800',
+    color: colours.white[0],
+    margin: 0,
+    textAlign: 'center',
+    [mq[2]]: {
+      fontSize: '24px',
+    },
+    [mq[5]]: {
+      fontSize: '28px',
+    }
+  },
+  errorDesc: {
+    fontSize: '16px',
+    fontWeight: '600',
+    color: colours.white[0],
+    margin: 0,
+    textAlign: 'center',
+    [mq[2]]: {
+      fontSize: '20px',
+    },
+    [mq[5]]: {
+      fontSize: '24px',
+    }
+  },
+  errorDescClick: {
+    cursor: 'pointer',
+    textDecoration: 'none',
+    color: colours.primary,
   },
   primaryButton: {
     display: 'flex',

@@ -8,11 +8,11 @@ import { collectionList } from '../styles/collectionList'
 import Header from '../component/header'
 import Footer from '../component/footer'
 import CollectionCard from '../component/collectionCard'
-import { collectionData } from '../constants/collectionData'
+import { collectionData, emptyCollection } from '../constants/collectionData'
 import { FolderAdd } from 'emotion-icons/fluentui-system-filled'
 
 export default function Home() {
-  const [data, setData] = useState(collectionData)
+  const [data, setData] = useState(emptyCollection)
 
   return (
     <div className='container' css={global.container}>
@@ -35,6 +35,12 @@ export default function Home() {
               />
             ))}
           </div>
+          { data && data.length <= 0 &&
+            <div className="error-page-container" css={global.errorContainer}>
+              <h1 className="errorTitle" css={global.errorTitle}>No Collection Found</h1>
+              <p className="errorTitle" css={global.errorDesc}><a className="clickable" css={global.errorDescClick}>Create new collection </a>to get started</p>
+            </div>
+          }
         </div>
       </div>
       <Footer />
