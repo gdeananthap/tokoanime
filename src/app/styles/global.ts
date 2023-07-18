@@ -29,22 +29,25 @@ export const global = createStyles({
   pageContainer: {
     display: 'flex',
     flexDirection: 'column',
-    padding: '24px 16px',
+    padding: '24px 16px 40px',
     width: 'calc(100% - 32px)',
     [mq[2]]: {
-      padding: '24px 20px',
+      padding: '24px 20px 40px',
       width: 'calc(100% - 40px)',
     },
     [mq[3]]: {
-      padding: '24px',
+      padding: '24px 24px 40px',
       width: 'calc(100% - 48px)',
     }
   },
   h1: {
-    fontSize: '24px',
+    fontSize: '20px',
     fontWeight: '800',
     color: colours.white[0],
     margin: 0,
+    [mq[0]]: {
+      fontSize: '24px',
+    },
     [mq[2]]: {
       fontSize: '40px',
     }
@@ -76,28 +79,38 @@ export const global = createStyles({
     alignItems: 'center',
     gap: '12px',
     backgroundColor: colours.primary,
-    padding: '8px',
+    padding: '4px',
     border: '1px solid',
     borderColor: colours.primary,
     borderRadius: '5px',
     cursor: 'pointer',
+    [mq[0]]: {
+      padding: '8px',
+    },
     [mq[2]]: {
       padding: '8px 16px',
     },
   },
   primaryButtonTitle: {
-    fontSize: '12px',
+    fontSize: '10px',
     fontWeight: '800',
     color: colours.white[0],
     margin: 0,
+    [mq[0]]: {
+      fontSize: '12px',
+    },
     [mq[2]]: {
       fontSize: '16px',
     }
   },
   primaryButtonIcon: {
-    height: '16px',
-    width: '16px',
+    height: '12px',
+    width: '12px',
     color: colours.white[0],
+    [mq[1]]: {
+      height: '16px',
+      width: '16px',
+    },
     [mq[2]]: {
       height: '20px',
       width: '20px',

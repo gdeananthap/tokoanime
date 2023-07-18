@@ -10,8 +10,7 @@ import Header from './component/header'
 import Footer from './component/footer'
 import AnimeCard from './component/animeCard'
 import Pagination from './component/pagination'
-import Image from 'next/image'
-import { animeData } from './constants/animeList';
+import { animeData } from './constants/animeData';
 import { AddSquareMultiple } from 'emotion-icons/fluentui-system-filled'
 
 export default function Home() {

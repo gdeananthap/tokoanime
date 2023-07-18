@@ -2,11 +2,11 @@
 /** @jsx jsx */
 "use client";
 import { jsx } from '@emotion/react'
-import PageItem from './pageItem';
+import PageItem from './pageItem'
 import { useRouter } from 'next/navigation'
 import React, { MouseEvent } from 'react'
-import { pagination } from '../styles/pagination';
-import { createPaginationArray } from '../utils/createPaginationArray';
+import { pagination } from '../styles/pagination'
+import { createPaginationArray } from '../utils/createPaginationArray'
 
 export type Props = {
   currentPage: number;
