@@ -30,6 +30,7 @@ export default function Home() {
             { data && data.length > 0 && data.map((collection, index) => (
               <CollectionCard 
                 collection={collection}
+                showRemove={true}
                 index={index}
                 key={index}
               />

@@ -2,6 +2,7 @@
 /** @jsx jsx */
 "use client";
 import { jsx } from '@emotion/react'
+import { useRouter } from 'next/navigation';
 import React, { MouseEvent } from 'react'
 import Image from 'next/image'
 import { AddSquare } from 'emotion-icons/fluentui-system-regular'
@@ -24,9 +25,10 @@ export type Props = {
 }
 
 export default function AnimeCard(props: Props) {
+  const router = useRouter()
 
   const goToAnimeDetail = (id: number) => {
-    console.log(`go to anime detail with id: ${id}`)
+    router.push(`/anime?id=${id}`)
   }
 
   const addAnimeToCart = (id: number, event: MouseEvent): void => {

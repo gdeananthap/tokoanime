@@ -60,7 +60,16 @@ export const global = createStyles({
     }
   },
   h2: {
-
+    fontSize: '16px',
+    fontWeight: '800',
+    color: colours.white[0],
+    margin: '40px 0 0 0',
+    [mq[0]]: {
+      fontSize: '20px',
+    },
+    [mq[2]]: {
+      fontSize: '32px',
+    }
   },
   h3: {
     fontSize: '12px',
@@ -91,6 +100,19 @@ export const global = createStyles({
     },
     [mq[5]]: {
       fontSize: '28px',
+    }
+  },
+  errorTitleSmall: {
+    fontSize: '12px',
+    fontWeight: '600',
+    color: colours.primary,
+    margin: 0,
+    textAlign: 'center',
+    [mq[2]]: {
+      fontSize: '16px',
+    },
+    [mq[5]]: {
+      fontSize: '24px',
     }
   },
   errorDesc: {
