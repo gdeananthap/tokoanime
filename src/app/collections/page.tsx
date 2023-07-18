@@ -8,11 +8,11 @@ import { collectionList } from '../styles/collectionList'
 import Header from '../component/header'
 import Footer from '../component/footer'
 import CollectionCard from '../component/collectionCard'
-import { collectionData, emptyCollection } from '../constants/collectionData'
+import { collectionData } from '../constants/collectionData'
 import { FolderAdd } from 'emotion-icons/fluentui-system-filled'
 
 export default function Home() {
-  const [data, setData] = useState(emptyCollection)
+  const [data, setData] = useState(collectionData)
 
   return (
     <div className='container' css={global.container}>

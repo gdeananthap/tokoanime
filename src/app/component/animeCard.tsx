@@ -17,7 +17,6 @@ export type Props = {
       large: string;
     };
     genres: string[];
-    averageScore: number;
     startDate: {
       year: number;
     };
