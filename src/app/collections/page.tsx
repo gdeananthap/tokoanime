@@ -71,7 +71,7 @@ export default function Home() {
           <div className="collection-list-header" css={collectionList.header}>
             <h1 className="collection-list-title" css={global.h1}>My Collections</h1>
             <button className="create-collection" css={global.primaryButton} onClick={toggleOpenModalName}>
-              <p className="create-collection-title" css={global.primaryButtonTitle}>Create New Collection</p>
+              <p className="create-collection-title" css={global.primaryButtonTitle}>Add a Collection</p>
               <FolderAdd className="create-collection-icon" css={global.primaryButtonIcon}/>
             </button>
           </div>
