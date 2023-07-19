@@ -32,6 +32,14 @@ export const collectionList = createStyles({
       gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
     },
   },
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    width: '100%',
+  },
   header: {
     display: 'flex',
     flexDirection: 'row',
@@ -155,7 +163,7 @@ export const collectionList = createStyles({
   cardLabel: {
     maxWidth: 'calc(100% - 24px)',
     height: '50px',
-    padding: '21px 8px 0px',
+    padding: '24px 8px 0px',
     bottom: 0,
     [mq[2]]: {
       maxWidth: 'calc(100% - 32px)',
@@ -164,13 +172,13 @@ export const collectionList = createStyles({
     },
     [mq[3]]: {
       maxWidth: 'calc(100% - 36px)',
-      height: '80px',
-      padding: '36px 14px 0px',
+      height: '70px',
+      padding: '24px 14px 0px',
     },
     [mq[5]]: {
       maxWidth: 'calc(100% - 40px)',
       height: '80px',
-      padding: '40px 16px 0px',
+      padding: '24px 16px 0px',
     },
   },
   title: {

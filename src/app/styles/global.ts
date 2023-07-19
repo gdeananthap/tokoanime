@@ -195,6 +195,25 @@ export const global = createStyles({
       padding: '8px 16px',
     },
   },
+  warningButtonSmall: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: '4px',
+    backgroundColor: colours.error,
+    padding: '4px',
+    border: '1px solid',
+    borderColor: colours.error,
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginBottom: '8px',
+    [mq[2]]: {
+      padding: '4px 8px',
+    },
+    [mq[5]]: {
+      padding: '8px 16px',
+    },
+  },
   primaryButtonTitle: {
     fontFamily: `${nunito_sans.style.fontFamily}`,
     fontSize: '10px',
