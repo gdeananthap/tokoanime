@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import React, { MouseEvent } from 'react'
 import Image from 'next/image'
 import { AddSquare } from 'emotion-icons/fluentui-system-regular'
+import { Delete } from 'emotion-icons/material'
 import { animeList } from '../styles/animeList'
 
 export type Props = {
@@ -21,7 +22,10 @@ export type Props = {
     startDate: {
       year: number;
     };
-  }
+  },
+  showRemove: boolean,
+  setRemoveAnime: () => void,
+  setAddAnime: () => void,
 }
 
 export default function AnimeCard(props: Props) {
@@ -31,16 +35,23 @@ export default function AnimeCard(props: Props) {
     router.push(`/anime?id=${id}`)
   }
 
-  const addAnimeToCart = (id: number, event: MouseEvent): void => {
+  const clickIcon = (event: MouseEvent): void => {
     event.stopPropagation();
-    console.log(`add anime to cart with id: ${id}`);
+    if (props.showRemove) {
+      props.setRemoveAnime()
+    } else {
+      props.setAddAnime()
+    }
   };
 
   return (
     <div className="anime-card" css={animeList.card} onClick={() => goToAnimeDetail(props.anime.id)}>
       <Image src={props.anime.coverImage.large} alt="anime cover" className="anime-cover" width={240} height={320} css={animeList.coverImage} placeholder="blur" blurDataURL='/cover-placeholder.png'/>
-      <div className="anime-card-button" css={animeList.cardButton} onClick={(event) => addAnimeToCart(props.anime.id, event)}>
-        <AddSquare className="bulk-add-icon" css={animeList.buttonIcon}/>
+      <div className="anime-card-button" css={animeList.cardButton} onClick={(event) => clickIcon(event)}>
+        { props.showRemove ?
+          <Delete className="bulk-add-icon" css={animeList.buttonIcon}/> :
+          <AddSquare className="bulk-add-icon" css={animeList.buttonIcon}/>
+        }
       </div>
       <div className="anime-card-label" css={animeList.cardLabel}>
         <h3 className="anime-title" css={animeList.title}>{props.anime.title.romaji}</h3>

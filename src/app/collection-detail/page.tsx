@@ -12,6 +12,8 @@ import AnimeCard from '../component/animeCard'
 import ModalName from '../component/modalName'
 import { Edit } from 'emotion-icons/material'
 import { Collection, getCollectionById } from '../utils/collection'
+import { Anime } from '../utils/anime';
+import ModalRemoveAnime from '../component/modalRemoveAnime';
 
 export default function CollectionDetail() {
   const router = useRouter()
@@ -22,19 +24,44 @@ export default function CollectionDetail() {
   const [loading, setLoading] = useState(false)
   const [openModalEdit, setOpenModalEdit] = useState(false)
   const [openModalRemove, setOpenModalRemove] = useState(false)
+  const placeholderAnimeToRemove = {
+    id: 15,
+    coverImage: {
+      large: ""
+    },
+    bannerImage: "",
+    title: {
+      romaji: ""
+    },
+    synonyms: [],
+    description: "",
+    status: "",
+    genres: [],
+    averageScore: -1,
+    startDate: {
+      year: -999,
+      month: -1,
+      day: -1
+    },
+    episodes: -1,
+    duration: -1,
+    season: "",
+    seasonYear: -999
+  }
+  const [animeToRemove, setAnimeToRemove] = useState<Anime>(placeholderAnimeToRemove)
 
   const toggleOpenModalEdit = () => {
     setOpenModalEdit(!openModalEdit)
   }
 
-  // const toggleOpenModalRemove = () => {
-  //   setOpenModalRemove(!openModalRemove)
-  // }
+  const toggleOpenModalRemove = () => {
+    setOpenModalRemove(!openModalRemove)
+  }
 
-  // const clickModalRemove = (collection : Collection) => {
-  //   setCollectionToRemove(collection)
-  //   toggleOpenModalRemove()
-  // }
+  const clickModalRemove = (anime : Anime) => {
+    setAnimeToRemove(anime)
+    toggleOpenModalRemove()
+  }
 
   const refreshData = useCallback(() => {
     setLoading(true)
@@ -77,6 +104,9 @@ export default function CollectionDetail() {
                 <AnimeCard 
                   anime={anime}
                   key={index}
+                  showRemove={true}
+                  setAddAnime={()=>{}}
+                  setRemoveAnime={()=>{clickModalRemove(anime)}}
                 />
               ))}
             </div>
@@ -95,6 +125,14 @@ export default function CollectionDetail() {
           refresh={refreshData}
           collectionId={dataCollection.id}
           collectionName={dataCollection.title}
+        /> }
+        { !error && !loading && 
+        <ModalRemoveAnime 
+          open={openModalRemove}
+          toggleOpen={toggleOpenModalRemove}
+          refresh={refreshData}
+          collection={dataCollection}
+          anime={animeToRemove}
         /> }
         { error &&
           <div className="page-container" css={global.pageContainer}>

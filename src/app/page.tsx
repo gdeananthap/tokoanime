@@ -50,6 +50,9 @@ export default function Home() {
               <AnimeCard 
                 anime={anime}
                 key={index}
+                showRemove={false}
+                setAddAnime={()=>{}}
+                setRemoveAnime={()=>{}}
               />
             ))}
           </div>}

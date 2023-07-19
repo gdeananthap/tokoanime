@@ -81,8 +81,20 @@ export function generateNewCollectionName() : string {
 export function addAnimeToCollection(id: number, anime: Anime) : void {
   const currentCollectionList: Collection[] = JSON.parse(localStorage.getItem('collectionList') || "[]")
   const newCollectionList =  currentCollectionList.map(collection => {
-    if (collection.id === id) {
+    if (collection.id === id && !isAnimeInCollection(id, anime.id)) {
       const updatedAnimeList = [...collection.animeList, anime];
+      return { ...collection, animeList: updatedAnimeList };
+    }
+    return collection;
+  });
+  localStorage.setItem('collectionList', JSON.stringify(newCollectionList))
+}
+
+export function removeAnimeInCollection(collectionId: number, animeId: number) : void {
+  const currentCollectionList: Collection[] = JSON.parse(localStorage.getItem('collectionList') || "[]")
+  const newCollectionList =  currentCollectionList.map(collection => {
+    if (collection.id === collectionId && isAnimeInCollection(collectionId, animeId)) {
+      const updatedAnimeList = collection.animeList.filter((anime: Anime) => anime.id !== animeId);
       return { ...collection, animeList: updatedAnimeList };
     }
     return collection;
@@ -95,4 +107,13 @@ export function getCollectionsWithAnime(animeId: number): Collection[] {
   return currentCollectionList.filter(collection =>
     collection.animeList.some(anime => anime.id === animeId)
   );
+}
+
+export function isAnimeInCollection(collectionId: number, animeId: number): boolean {
+  const collection = getCollectionById(collectionId)
+  if (collection) {
+    return collection.animeList.some(anime => anime.id === animeId)
+  } else {
+    return false
+  }
 }
