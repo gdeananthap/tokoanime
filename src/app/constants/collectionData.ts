@@ -1,130 +1,40 @@
 export const collectionData = [
   {
     id: 1,
-    title: 'Top 10 Drama Anime in The World',
-    cover: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx19-ham53gnijfiN.jpg',
-  },
-  {
-    id: 2,
-    title: 'Top 10 Adventures Anime',
-    cover: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/b8-ReS3TwSgrDDi.jpg',
-  },
-  {
-    id: 3,
-    title: 'Top 10 Sports Animewaokawokwaoakwowakoawkowaqk',
-    cover: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx15-A4F2t0TgWoi4.png',
-  },
-  {
-    id: 4,
-    title: 'Top 10 Shounen Anime of All Time',
-    cover: '',
-  },
-  {
-    id: 5,
-    title: 'Top 10 Slice of Life Anime',
-    cover: '',
-  },
-  {
-    id: 6,
-    title: 'Top 10 Fantasy Anime in The World',
-    cover: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx19-ham53gnijfiN.jpg',
-  },
-  {
-    id: 7,
-    title: 'Top 10 Action Anime',
-    cover: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx7-6uh1fPvbgS9t.png',
-  },
-  {
-    id: 8,
     title: 'My Favourites',
-    cover: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx17-6kqIbdUk3dgi.png',
+    animeList: [
+      {
+        id: 15,
+        coverImage: {
+          large: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx15-A4F2t0TgWoi4.png"
+        },
+        bannerImage: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/n15-1eTutXlxYzYl.jpg",
+        title: {
+          romaji: "Eyeshield 21"
+        },
+        synonyms: [
+          "Eyeshield21"
+        ],
+        description: "Welcome To the Gridiron of the Damned!   Huge hulking bodies throw themselves at each other, while a tiny lithe body runs between them for the goal!  No, it&rsquo;s not a game of football, it&rsquo;s Sena Kobayakawa trying to evade the monstrous Ha-Ha brothers down the halls of Deimon High School!  But wait!  Sena&rsquo;s incredible skills at not getting caught have been spotted by the devilish (possibly actually demonic) captain of the school&rsquo;s embryonic American style football team, and when Sena asks to be the teams manager, he gets  thrust onto the field as a running back instead!  But there are two BIG catches: first, to keep the identity of their new &ldquo;star&rdquo; player an absolute secret, Yoichi makes Sena wear an opaque visor on his helmet and gives him the alias of &ldquo;Eyeshield 21.&rdquo;  And the second catch?  Well, in order to hit his fastest &ldquo;speed of light&rdquo; running mode, Sena usually has to be absolutely terrified. Not that THAT will be a problem with the monstrous players that he&rsquo;ll soon find himself running from!  The insanity hits the streets when the feet meet the cleats in EYESHIELD 21! <br><br>\n(Source: Sentai Filmworks)",
+        status: "FINISHED",
+        genres: [
+          "Action",
+          "Comedy",
+          "Sports"
+        ],
+        averageScore: 75,
+        startDate: {
+          year: 2005,
+          month: 4,
+          day: 6
+        },
+        episodes: 145,
+        duration: 23,
+        season: "SPRING",
+        seasonYear: 2005
+      }
+    ]
   },
 ]
 
 export const emptyCollection = []
-
-export const collectionDetail = {
-  id: 8,
-  title: 'My Favourites',
-  animeList: [
-    {
-      id: 1,
-      title: {
-        romaji: "Cowboy Bebop"
-      },
-      coverImage: {
-        large: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx1-CXtrrkMpJ8Zq.png"
-      },
-      genres: [
-        "Action",
-        "Adventure",
-        "Drama",
-        "Sci-Fi"
-      ],
-      startDate: {
-        year: 1998
-      }
-    },
-    {
-      id: 5,
-      title: {
-        romaji: "Cowboy Bebop: Tengoku no Tobira"
-      },
-      coverImage: {
-        large: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx5-NozHwXWdNLCz.jpg"
-      },
-      genres: [
-        "Action",
-        "Drama",
-        "Mystery",
-        "Sci-Fi"
-      ],
-      startDate: {
-        year: 2001
-      }
-    },
-    {
-      id: 6,
-      title: {
-        romaji: "TRIGUN"
-      },
-      coverImage: {
-        large: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx6-Zzun7PHNNgPt.jpg"
-      },
-      genres: [
-        "Action",
-        "Adventure",
-        "Comedy",
-        "Drama",
-        "Sci-Fi"
-      ],
-      startDate: {
-        year: 1998
-      }
-    },
-    {
-      id: 7,
-      title: {
-        romaji: "Witch Hunter ROBIN"
-      },
-      coverImage: {
-        large: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx7-6uh1fPvbgS9t.png"
-      },
-      genres: [
-        "Action",
-        "Drama",
-        "Mystery",
-        "Supernatural"
-      ],
-      startDate: {
-        year: 2002
-      }
-    },
-  ]
-}
-
-export const collectionDetailEmpty = {
-  id: 8,
-  title: 'My Favourites',
-  animeList: []
-}

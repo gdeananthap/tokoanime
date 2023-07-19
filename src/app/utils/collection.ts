@@ -1,7 +1,9 @@
+import { Anime } from "./anime"
+
 export type Collection = {
   id: number,
   title: string,
-  cover: string
+  animeList: Anime[],
 }
 
 export function createCollection(name: string) : void {
@@ -10,11 +12,10 @@ export function createCollection(name: string) : void {
   const newCollection = {
     id: newId,
     title: name=== '' ? generateNewCollectionName() : name,
-    cover: ''
+    animeList: [],
   }
   const newCollectionList = [...currentCollectionList, newCollection]
   localStorage.setItem('collectionList', JSON.stringify(newCollectionList))
-  localStorage.setItem(`collection-${newId}`, '[]')
   localStorage.setItem('latestId', newId.toString())
 }
 
@@ -44,7 +45,6 @@ export function removeCollection(id: number) : void {
   const currentCollectionList = JSON.parse(localStorage.getItem('collectionList') || "[]")
   const newCollectionList = currentCollectionList.filter((collection: Collection) => collection.id !== id)
   localStorage.setItem('collectionList', JSON.stringify(newCollectionList))
-  localStorage.removeItem(`collection-${id}`)
 }
 
 export function isCollectionNameUnique(name: string) : boolean {
@@ -76,4 +76,23 @@ export function generateNewCollectionName() : string {
     }
   }
   return name
+}
+
+export function addAnimeToCollection(id: number, anime: Anime) : void {
+  const currentCollectionList: Collection[] = JSON.parse(localStorage.getItem('collectionList') || "[]")
+  const newCollectionList =  currentCollectionList.map(collection => {
+    if (collection.id === id) {
+      const updatedAnimeList = [...collection.animeList, anime];
+      return { ...collection, animeList: updatedAnimeList };
+    }
+    return collection;
+  });
+  localStorage.setItem('collectionList', JSON.stringify(newCollectionList))
+}
+
+function getCollectionsWithAnime(animeId: number): Collection[] {
+  const currentCollectionList: Collection[] = JSON.parse(localStorage.getItem('collectionList') || "[]")
+  return currentCollectionList.filter(collection =>
+    collection.animeList.some(anime => anime.id === animeId)
+  );
 }

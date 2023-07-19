@@ -11,14 +11,13 @@ import Footer from '../component/footer'
 import AnimeCard from '../component/animeCard'
 import ModalName from '../component/modalName'
 import { Edit } from 'emotion-icons/material'
-import { getCollectionById } from '../utils/collection'
+import { Collection, getCollectionById } from '../utils/collection'
 
 export default function CollectionDetail() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [dataCollection, setDataCollection] = useState({id: 1, title: 'Error', cover: ''})
+  const [dataCollection, setDataCollection] = useState<Collection>({id: 1, title: 'Error', animeList: []})
   const [error, setError] = useState(true)
-  const [dataAnime, setDataAnime] = useState([])
   const [collectionId, setCollectionId] = useState(-1)
   const [loading, setLoading] = useState(false)
   const [openModalEdit, setOpenModalEdit] = useState(false)
@@ -40,10 +39,8 @@ export default function CollectionDetail() {
   const refreshData = useCallback(() => {
     setLoading(true)
     const collection = getCollectionById(collectionId)
-    if(collection) {
+    if (collection) {
       setDataCollection(collection)
-      const animeList = JSON.parse(localStorage.getItem(`collection-${collectionId}`) || '[]')
-      setDataAnime(animeList)
       setError(false)
     } else {
       setError(true)
@@ -76,14 +73,14 @@ export default function CollectionDetail() {
               </button>
             </div>
             <div className="anime-list-container" css={animeList.container}>
-              { dataAnime && dataAnime.length > 0 && dataAnime.map((anime, index) => (
+              { dataCollection.animeList && dataCollection.animeList.length > 0 && dataCollection.animeList.map((anime, index) => (
                 <AnimeCard 
                   anime={anime}
                   key={index}
                 />
               ))}
             </div>
-            { dataAnime && dataAnime.length <= 0 &&
+            { dataCollection.animeList && dataCollection.animeList.length <= 0 &&
               <div className="error-page-container" css={global.errorContainer}>
                 <h1 className="errorTitle" css={global.errorTitle}>No Anime Found</h1>
                 <p className="errorTitle" css={global.errorDesc}><a className="clickable" css={global.errorDescClick} onClick={goToAnimeList}>Explore list of anime </a>to get started</p>

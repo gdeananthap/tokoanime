@@ -20,8 +20,9 @@ export default function Home() {
     id: -1,
     title: 'dummy',
     cover: '',
+    animeList: [],
   }
-  const [collectionToRemove, setCollectionToRemove] = useState(placeholderCollectionToRemove)
+  const [collectionToRemove, setCollectionToRemove] = useState<Collection>(placeholderCollectionToRemove)
   const [openModalName, setOpenModalName] = useState(false)
   const [openModalRemove, setOpenModalRemove] = useState(false)
 

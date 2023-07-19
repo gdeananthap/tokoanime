@@ -10,11 +10,7 @@ import { collectionList } from '../styles/collectionList'
 import { Collection } from '../utils/collection';
 
 export type Props = {
-  collection: {
-    id: number;
-    title: string;
-    cover: string;
-  },
+  collection: Collection,
   index: number,
   showRemove: boolean,
   setRemoveCollection: () => void,
@@ -26,6 +22,8 @@ export default function CollectionCard({
   showRemove,
   setRemoveCollection
 } : Props) {
+
+  console.log(collection)
 
   const router = useRouter()
 
@@ -48,7 +46,9 @@ export default function CollectionCard({
       <div className="collection-card-label" css={collectionList.cardLabel}>
         <h3 className="collection-title" css={collectionList.title}>{collection.title}</h3>
       </div>
-      <Image src={collection.cover === '' ? '/collection-placeholder.png' : collection.cover} alt="collection cover" className="collection-cover" width={240} height={320} css={collectionList.coverImage} placeholder="blur" blurDataURL='/collection-placeholder.png'/>
+      { collection && collection.animeList &&
+        <Image src={collection.animeList.length === 0 || collection.animeList[0].coverImage.large === '' ? '/collection-placeholder.png' : collection.animeList[0].coverImage.large} alt="collection cover" className="collection-cover" width={240} height={320} css={collectionList.coverImage} placeholder="blur" blurDataURL='/collection-placeholder.png'/>
+      }
     </div>
   )
 }
