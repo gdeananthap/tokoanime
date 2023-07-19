@@ -14,6 +14,7 @@ export function createCollection(name: string) : void {
   }
   const newCollectionList = [...currentCollectionList, newCollection]
   localStorage.setItem('collectionList', JSON.stringify(newCollectionList))
+  localStorage.setItem(`collection-${newId}`, '[]')
   localStorage.setItem('latestId', newId.toString())
 }
 
@@ -21,4 +22,5 @@ export function removeCollection(id: number) : void {
   const currentCollectionList = JSON.parse(localStorage.getItem('collectionList') || "[]")
   const newCollectionList = currentCollectionList.filter((collection: Collection) => collection.id !== id)
   localStorage.setItem('collectionList', JSON.stringify(newCollectionList))
+  localStorage.removeItem(`collection-${id}`)
 }
