@@ -15,6 +15,7 @@ import { Collection } from '../utils/collection';
 
 export default function Home() {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(false)
   const placeholderCollectionToRemove = {
     id: -1,
     title: 'dummy',
@@ -34,19 +35,19 @@ export default function Home() {
   }
 
   const clickModalRemove = (collection : Collection) => {
-    console.log(collection)
     setCollectionToRemove(collection)
     toggleOpenModalRemove()
   }
 
   const refreshData = () => {
+    setLoading(true)
     const collection = JSON.parse(localStorage.getItem('collectionList') || '[]')
     setData(collection)
+    setLoading(false)
   }
 
   useEffect(() => {
-    const collection = JSON.parse(localStorage.getItem('collectionList') || '[]')
-    setData(collection)
+    refreshData()
   }, []);
 
   return (
@@ -61,7 +62,8 @@ export default function Home() {
               <FolderAdd className="create-collection-icon" css={global.primaryButtonIcon}/>
             </button>
           </div>
-          <div className="collection-list-container" css={collectionList.container}>
+          { loading && <div className="loader" css={global.loading}></div> }
+          { !loading && <div className="collection-list-container" css={collectionList.container}>
             { data && data.length > 0 && data.map((collection, index) => (
               <CollectionCard 
                 collection={collection}
@@ -71,25 +73,25 @@ export default function Home() {
                 setRemoveCollection={() => clickModalRemove(collection)}
               />
             ))}
-          </div>
-          { data && data.length <= 0 &&
+          </div>}
+          { !loading && data && data.length <= 0 &&
             <div className="error-page-container" css={global.errorContainer}>
               <h1 className="errorTitle" css={global.errorTitle}>No Collection Found</h1>
               <p className="errorTitle" css={global.errorDesc}><a className="clickable" css={global.errorDescClick}>Create new collection </a>to get started</p>
             </div>
           }
         </div>
-        <ModalName 
+        { !loading && <ModalName 
           open={openModalName}
           toggleOpen={toggleOpenModalName}
           refresh={refreshData}
-        />
-        <ModalRemove
+        /> }
+        { !loading && <ModalRemove
           open={openModalRemove}
           toggleOpen={toggleOpenModalRemove}
           refresh={refreshData}
           collection={collectionToRemove}
-        />
+        />}
       </div>
       <Footer />
     </div>

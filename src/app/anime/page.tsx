@@ -105,6 +105,7 @@ export default function AnimeDetail() {
                   showRemove={false}
                   index={index}
                   key={index}
+                  setRemoveCollection={() => {}}
                 />
               ))}
             </div>
