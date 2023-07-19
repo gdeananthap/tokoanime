@@ -47,9 +47,9 @@ export default function AnimeCard(props: Props) {
   return (
     <div className="anime-card" css={animeList.card} onClick={() => goToAnimeDetail(props.anime.id)}>
       <Image src={props.anime.coverImage.large} alt="anime cover" className="anime-cover" width={240} height={320} css={animeList.coverImage} placeholder="blur" blurDataURL='/cover-placeholder.png'/>
-      <div className="anime-card-button" css={animeList.cardButton} onClick={(event) => clickIcon(event)}>
+      <div className="anime-card-button" css={props.showRemove ? animeList.cardButtonText : animeList.cardButton} onClick={(event) => clickIcon(event)}>
         { props.showRemove ?
-          <Delete className="bulk-add-icon" css={animeList.buttonIcon}/> :
+          <p className="remove-button" css={animeList.removeButton}>Remove</p> :
           <AddSquare className="bulk-add-icon" css={animeList.buttonIcon}/>
         }
       </div>

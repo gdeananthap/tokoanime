@@ -75,6 +75,26 @@ export const animeList = createStyles({
       width: '32px',
     },
   },
+  cardButtonText: {
+    position: 'absolute',
+    width: '40px',
+    height: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    borderRadius: '0px 10px 0px 0px',
+    top: 0,
+    right: 0,
+    [mq[2]]: {
+      height: '24px',
+      width: '54px',
+    },
+    [mq[5]]: {
+      height: '32px',
+      width: '72px',
+    },
+  },
   buttonIcon: {
     height: '12px',
     width: '12px',
@@ -162,6 +182,18 @@ export const animeList = createStyles({
     display: '-webkit-box',
     WebkitLineClamp: 1,
     WebkitBoxOrient: 'vertical',
+    [mq[2]]: {
+      fontSize: '12px',
+    },
+    [mq[5]]: {
+      fontSize: '16px',
+    },
+  },
+  removeButton:{
+    fontSize: '8px',
+    fontWeight: '800',
+    color: colours.white[0],
+    margin: 0,
     [mq[2]]: {
       fontSize: '12px',
     },
