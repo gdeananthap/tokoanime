@@ -8,13 +8,13 @@ import { modal } from '../styles/modal'
 import { Close } from 'emotion-icons/evaicons-solid'
 import { FolderAdd } from 'emotion-icons/fluentui-system-filled'
 import { Collection, addAnimeToCollection, createCollection, getAllCollection, } from '../utils/collection';
-import { Anime } from '../utils/anime';
+import { AnimeDetail, createAnimeObjFromDetail } from '../utils/anime';
 
 type Props = {
   open: boolean;
   toggleOpen: () => void;
   refresh: () => void;
-  anime: Anime,
+  anime: AnimeDetail,
 };
 
 export default function ModalAddAnime({ 
@@ -27,7 +27,7 @@ export default function ModalAddAnime({
   const [collections, setCollections] = useState<Collection[]>([])
 
   const addAnime = (collectionId: number) => {
-    addAnimeToCollection(collectionId, anime)
+    addAnimeToCollection(collectionId, createAnimeObjFromDetail(anime))
     refresh()
     toggleOpen()
   }

@@ -1,4 +1,4 @@
-import { Anime } from "./anime"
+import { Anime, emptyAnimeList } from "./anime"
 
 export type Collection = {
   id: number,
@@ -88,6 +88,21 @@ export function addAnimeToCollection(id: number, anime: Anime) : void {
     return collection;
   });
   localStorage.setItem('collectionList', JSON.stringify(newCollectionList))
+}
+
+export function bulkAddAnimeToCollection(id: number, animeList: Anime[]) : void {
+  const currentCollectionList: Collection[] = JSON.parse(localStorage.getItem('collectionList') || "[]")
+  const newCollectionList =  currentCollectionList.map(collection => {
+    if (collection.id === id) {
+      const existingAnimeIds = collection.animeList.map(anime => anime.id);
+      const newAnimeList = animeList.filter(anime => !existingAnimeIds.includes(anime.id));
+      const updatedAnimeList = [...collection.animeList, ...newAnimeList];
+      return { ...collection, animeList: updatedAnimeList };
+    }
+    return collection;
+  });
+  localStorage.setItem('collectionList', JSON.stringify(newCollectionList))
+  emptyAnimeList()
 }
 
 export function removeAnimeInCollection(collectionId: number, animeId: number) : void {

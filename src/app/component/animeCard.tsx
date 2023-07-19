@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import React, { MouseEvent } from 'react'
 import Image from 'next/image'
 import { AddSquare } from 'emotion-icons/fluentui-system-regular'
-import { Delete } from 'emotion-icons/material'
 import { animeList } from '../styles/animeList'
 
 export type Props = {

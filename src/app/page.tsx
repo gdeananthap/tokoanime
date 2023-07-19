@@ -13,15 +13,22 @@ import AnimeCard from './component/animeCard'
 import Pagination from './component/pagination'
 import { AddSquareMultiple } from 'emotion-icons/fluentui-system-filled'
 import { GET_ANIME_LIST, createVariables} from './api/getAnimeList'
+import { addAnimeToAnimeList } from './utils/anime';
+import ModalBulkAddAnime from './component/modalBulkAddAnime';
 
 export default function Home() {
   const searchParams = useSearchParams()
   const [currentPage, setCurrentPage] = useState<any>(1);
   const [search, setSearch] = useState<string>('');
+  const [openModalBulk, setOpenModalBulk] = useState<boolean>(false);
 
   const { loading, data } = useQuery(GET_ANIME_LIST, {
     variables: createVariables(currentPage, search),
   });
+
+  const toggleOpenModalBulk = () => {
+    setOpenModalBulk(!openModalBulk)
+  }
 
   useEffect(() => {
     const page = searchParams.get('page') || 1
@@ -40,7 +47,7 @@ export default function Home() {
           <div className="anime-list-header" css={animeList.header}>
             <h1 className="anime-list-title" css={global.h1}>Anime List</h1>
             <button className="bulk-add" css={global.primaryButton}>
-              <p className="bulk-add-title" css={global.primaryButtonTitle}>Collection Cart</p>
+              <p className="bulk-add-title" css={global.primaryButtonTitle} onClick={toggleOpenModalBulk}>Collection Cart</p>
               <AddSquareMultiple className="bulk-add-icon" css={global.primaryButtonIcon}/>
             </button>
           </div>
@@ -51,7 +58,7 @@ export default function Home() {
                 anime={anime}
                 key={index}
                 showRemove={false}
-                setAddAnime={()=>{}}
+                setAddAnime={()=>{addAnimeToAnimeList(anime)}}
                 setRemoveAnime={()=>{}}
               />
             ))}
@@ -64,6 +71,11 @@ export default function Home() {
             search={search}
           />}
         </div>
+        { !loading && 
+        <ModalBulkAddAnime 
+          open={openModalBulk}
+          toggleOpen={toggleOpenModalBulk}
+        /> }
       </div>
       <Footer />
     </div>

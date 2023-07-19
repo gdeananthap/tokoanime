@@ -29,24 +29,13 @@ export default function CollectionDetail() {
     coverImage: {
       large: ""
     },
-    bannerImage: "",
     title: {
       romaji: ""
     },
-    synonyms: [],
-    description: "",
-    status: "",
     genres: [],
-    averageScore: -1,
     startDate: {
       year: -999,
-      month: -1,
-      day: -1
     },
-    episodes: -1,
-    duration: -1,
-    season: "",
-    seasonYear: -999
   }
   const [animeToRemove, setAnimeToRemove] = useState<Anime>(placeholderAnimeToRemove)
 

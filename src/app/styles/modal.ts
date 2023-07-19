@@ -65,6 +65,34 @@ export const modal = createStyles({
       height: '600px',
     }
   },
+  modalContainerBulkAddAnime: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: '24px',
+    padding: '24px 16px',
+    margin: 'auto',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    height: '500px',
+    width: 'calc(100% - 64px)',
+    position: 'absolute',
+    zIndex: 2,
+    background: colours.black[70],
+    border: '1px solid',
+    borderColor: colours.black[50],
+    borderRadius: '10px',
+    maxWidth: '500px',
+    alignSelf: 'center',
+    [mq[2]]: {
+      height: '700px',
+      maxWidth: '600px',
+      gap: '40px',
+    },
+  },
   availableCollectionContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -84,6 +112,19 @@ export const modal = createStyles({
       height: '400px',
     },
   },
+  availableCollectionContainerSmall: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    gap: '8px',
+    maxHeight: '200px',
+    width: '100%',
+    [mq[2]]: {
+      maxHeight: '280px',
+      gap: '16px',
+    },
+  },
   collectionButtonContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -96,6 +137,53 @@ export const modal = createStyles({
       gap: '16px',
     },
     overflowY: 'scroll',
+  },
+  animeListContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: '8px',
+    height: 'calc(100% - 48px)',
+    width: '100%',
+    [mq[2]]: {
+      gap: '16px',
+    },
+    overflowY: 'scroll',
+  },
+  animeContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    gap: '8px',
+    width: '100%',
+
+  },
+  animeTitleContainer: {
+    minHeight: '32px',
+    height: '32px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: colours.black[50],
+    padding: '0px 16px',
+    border: '1px solid',
+    borderColor: colours.black[20],
+    borderRadius: '5px',
+    cursor: 'pointer',
+    width: 'calc(100% - 40px)',
+    [mq[2]]: {
+      width: 'calc(100% - 44px)',
+      minHeight: '36px',
+      height: '36px',
+    },
+    [mq[5]]: {
+      minHeight: '40px',
+      height: '40px',
+      width: 'calc(100% - 48px)',
+    }
   },
   background: {
     background: colours.black[90],
@@ -124,6 +212,24 @@ export const modal = createStyles({
     [mq[5]]: {
       fontSize: '24px',
     },
+  },
+  animeTitle: {
+    fontFamily: `${nunito_sans.style.fontFamily}`,
+    fontSize: '12px',
+    fontWeight: '800',
+    color: colours.white[0],
+    margin: 0,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    WebkitLineClamp: 1,
+    WebkitBoxOrient: 'vertical',
+    [mq[2]]: {
+      fontSize: '16px',
+    },
+    [mq[5]]: {
+      fontSize: '20px',
+    }
   },
   iconContainer: {
     cursor: 'pointer',
@@ -327,6 +433,40 @@ export const modal = createStyles({
     }
   },
   buttonNewIcon: {
+    height: '20px',
+    width: '20px',
+    color: colours.white[0],
+    [mq[2]]: {
+      height: '24px',
+      width: '24px',
+    },
+    [mq[5]]: {
+      height: '28px',
+      width: '28px',
+    }
+  },
+  deleteAnimeButton: {
+    width: '32px',
+    height: '32px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colours.error,
+    border: '1px solid',
+    borderColor: colours.error,
+    borderRadius: '5px',
+    cursor: 'pointer',
+    [mq[2]]: {
+      width: '36px',
+      height: '36px',
+    },
+    [mq[5]]: {
+      width: '40px',
+      height: '40px',
+    }
+  },
+  deleteAnimeIcon: {
     height: '20px',
     width: '20px',
     color: colours.white[0],
