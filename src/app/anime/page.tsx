@@ -3,7 +3,7 @@
 "use client";
 import { jsx } from '@emotion/react'
 import React, { useState, useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { useQuery } from '@apollo/client'
 import { global } from '../styles/global'
@@ -12,7 +12,6 @@ import { collectionList } from '../styles/collectionList'
 import Header from '../component/header'
 import Footer from '../component/footer'
 import CollectionCard from '../component/collectionCard'
-import { animeDetail } from '../constants/animeData'
 import { collectionData } from '../constants/collectionData'
 import { AddSquareMultiple } from 'emotion-icons/fluentui-system-filled'
 import { convertArray } from '../utils/convertArray'
@@ -40,13 +39,14 @@ export default function AnimeDetail() {
       <div className="main-container">
         <Header />
         <div className="page-container" css={global.pageContainer}>
-          <div className="anime-list-header" css={anime.header}>
+          { loading && <div className="loader" css={global.loading}></div> }
+          { !loading && <div className="anime-list-header" css={anime.header}>
             <h1 className="anime-list-title" css={global.h1}>{data?.Media.title.romaji}</h1>
-          </div>
-          { data?.Media.bannerImage &&
+          </div> }
+          { !loading && data?.Media.bannerImage &&
             <Image src={data?.Media.bannerImage} css={anime.banner} alt="anime banner" className="anime-banner" width={240} height={320} placeholder="blur" blurDataURL='/cover-placeholder.png'/>
           }
-          <div className="anime-detail-card" css={anime.card}>
+          {!loading && <div className="anime-detail-card" css={anime.card}>
             <Image src={data?.Media.coverImage.large ?? ''} css={anime.cover} alt="anime banner" className="anime-banner" width={240} height={320} placeholder="blur" blurDataURL='/cover-placeholder.png'/>
             <div className="anime-detail-container" css={anime.detailContainer}>
               <button className="bulk-add" css={global.primaryButton}>
@@ -95,9 +95,9 @@ export default function AnimeDetail() {
                 </div>
               </div>
             </div>
-          </div>
-          <h2 className="anime-list-title" css={global.h2}>Included in These Collections</h2>
-          { collections && collections.length > 0 && 
+          </div>}
+          {!loading && <h2 className="anime-list-title" css={global.h2}>Included in These Collections</h2>}
+          { !loading && collections && collections.length > 0 && 
             <div className="collection-list-container" css={collectionList.container}>
               { collections && collections.length > 0 && collections.map((collection, index) => (
                 <CollectionCard 
@@ -109,7 +109,7 @@ export default function AnimeDetail() {
               ))}
             </div>
           }
-          { collections && collections.length <= 0 &&
+          { !loading && collections && collections.length <= 0 &&
             <div className="error-page-container" css={global.errorContainer}>
               <p className="errorTitle" css={global.errorTitleSmall}>Sorry, you don’t have any collections that include this anime</p>
             </div>
