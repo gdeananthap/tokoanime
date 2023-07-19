@@ -90,7 +90,7 @@ export function addAnimeToCollection(id: number, anime: Anime) : void {
   localStorage.setItem('collectionList', JSON.stringify(newCollectionList))
 }
 
-function getCollectionsWithAnime(animeId: number): Collection[] {
+export function getCollectionsWithAnime(animeId: number): Collection[] {
   const currentCollectionList: Collection[] = JSON.parse(localStorage.getItem('collectionList') || "[]")
   return currentCollectionList.filter(collection =>
     collection.animeList.some(anime => anime.id === animeId)

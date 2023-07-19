@@ -4,6 +4,7 @@ import { keyframes } from '@emotion/react'
 import { createStyles } from './createStyles'
 import { colours } from './colours'
 import { mq } from './mediaqueries'
+import { nunito_sans } from '../layout'
 
 const spin = keyframes`
   0% { transform: rotate(0deg); }
@@ -176,6 +177,7 @@ export const global = createStyles({
     },
   },
   primaryButtonTitle: {
+    fontFamily: `${nunito_sans.style.fontFamily}`,
     fontSize: '10px',
     fontWeight: '800',
     color: colours.white[0],

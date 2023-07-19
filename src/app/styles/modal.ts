@@ -3,6 +3,7 @@
 import { createStyles } from './createStyles'
 import { colours } from './colours'
 import { mq } from './mediaqueries'
+import { nunito_sans } from '../layout'
 
 export const modal = createStyles({
   modalContainer: {
@@ -30,6 +31,72 @@ export const modal = createStyles({
       maxWidth: '600px',
     }
   },
+  modalContainerAddAnime: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: '24px',
+    padding: '24px 16px',
+    margin: 'auto',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    height: '300px',
+    width: 'calc(100% - 64px)',
+    position: 'absolute',
+    zIndex: 2,
+    background: colours.black[70],
+    border: '1px solid',
+    borderColor: colours.black[50],
+    borderRadius: '10px',
+    maxWidth: '500px',
+    alignSelf: 'center',
+    [mq[0]]: {
+      height: '400px',
+    },
+    [mq[2]]: {
+      height: '500px',
+      maxWidth: '600px',
+      gap: '40px',
+    },
+    [mq[5]]: {
+      height: '600px',
+    }
+  },
+  availableCollectionContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    gap: '8px',
+    height: '200px',
+    width: '100%',
+    [mq[0]]: {
+      height: '300px',
+    },
+    [mq[2]]: {
+      height: '400px',
+      gap: '16px',
+    },
+    [mq[5]]: {
+      height: '400px',
+    },
+  },
+  collectionButtonContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: '8px',
+    height: 'calc(100% - 48px)',
+    width: '100%',
+    [mq[2]]: {
+      gap: '16px',
+    },
+    overflowY: 'scroll',
+  },
   background: {
     background: colours.black[90],
     opacity: '20%',
@@ -37,7 +104,7 @@ export const modal = createStyles({
     height: '100%',
     position: 'absolute',
     zIndex: 1,
-    top: '0',
+    top: 0,
   },
   header: {
     display: 'flex',
@@ -82,6 +149,14 @@ export const modal = createStyles({
     justifyContent: 'center',
     gap: '4px',
   },
+  bodyAddAnime: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '16px',
+  },
   bodyTitle: {
     fontSize: '14px',
     fontWeight: '400',
@@ -109,6 +184,19 @@ export const modal = createStyles({
     },
     [mq[5]]: {
       fontSize: '18px',
+    },
+  },
+  availableTitle: {
+    fontSize: '12px',
+    fontWeight: '700',
+    color: colours.white[0],
+    margin: 0,
+    textAlign: 'left',
+    [mq[2]]: {
+      fontSize: '16px',
+    },
+    [mq[5]]: {
+      fontSize: '14px',
     },
   },
   input: {
@@ -193,6 +281,7 @@ export const modal = createStyles({
     },
   },
   buttonTitle: {
+    fontFamily: `${nunito_sans.style.fontFamily}`,
     fontSize: '12px',
     fontWeight: '800',
     color: colours.white[0],
@@ -203,5 +292,98 @@ export const modal = createStyles({
     [mq[5]]: {
       fontSize: '20px',
     },
+  },
+  buttonNewCollection: {
+    width: '100%',
+    height: '32px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: colours.primary,
+    padding: '0px 16px',
+    border: '1px solid',
+    borderColor: colours.primary,
+    borderRadius: '5px',
+    cursor: 'pointer',
+    [mq[2]]: {
+      height: '36px',
+    },
+    [mq[5]]: {
+      height: '40px',
+    }
+  },
+  buttonNewCollectionTitle: {
+    fontFamily: `${nunito_sans.style.fontFamily}`,
+    fontSize: '12px',
+    fontWeight: '800',
+    color: colours.white[0],
+    margin: 0,
+    [mq[2]]: {
+      fontSize: '16px',
+    },
+    [mq[5]]: {
+      fontSize: '20px',
+    }
+  },
+  buttonNewIcon: {
+    height: '20px',
+    width: '20px',
+    color: colours.white[0],
+    [mq[2]]: {
+      height: '24px',
+      width: '24px',
+    },
+    [mq[5]]: {
+      height: '28px',
+      width: '28px',
+    }
+  },
+  collectionButton: {
+    width: '100%',
+    minHeight: '32px',
+    height: '32px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: colours.black[50],
+    padding: '0px 16px',
+    border: '1px solid',
+    borderColor: colours.black[20],
+    borderRadius: '5px',
+    cursor: 'pointer',
+    [mq[2]]: {
+      minHeight: '36px',
+      height: '36px',
+    },
+    [mq[5]]: {
+      minHeight: '40px',
+      height: '40px',
+    }
+  },
+  collectionButtonTitle: {
+    fontFamily: `${nunito_sans.style.fontFamily}`,
+    textAlign: 'left',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    WebkitLineClamp: 1,
+    WebkitBoxOrient: 'vertical',
+    fontSize: '12px',
+    fontWeight: '800',
+    color: colours.white[0],
+    margin: 0,
+    [mq[2]]: {
+      fontSize: '16px',
+    },
+    [mq[5]]: {
+      fontSize: '20px',
+    }
+  },
+  divider: {
+    width: '100%',
+    height: '2px',
+    backgroundColor: colours.black[20],
   }
 })

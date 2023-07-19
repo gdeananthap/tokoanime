@@ -4,9 +4,9 @@
 import { jsx } from '@emotion/react'
 import { global } from './styles/global';
 import { Nunito_Sans } from 'next/font/google'
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-const nunito_sans = Nunito_Sans({ subsets: ['latin'] })
+export const nunito_sans = Nunito_Sans({ subsets: ['latin'] })
 
 const client = new ApolloClient({
   uri: 'https://graphql.anilist.co',

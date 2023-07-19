@@ -6,32 +6,46 @@ import React, { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { useQuery } from '@apollo/client'
+import * as he from 'he'
 import { global } from '../styles/global'
 import { anime } from '../styles/anime'
 import { collectionList } from '../styles/collectionList'
 import Header from '../component/header'
 import Footer from '../component/footer'
 import CollectionCard from '../component/collectionCard'
+import ModalAddAnime from '../component/modalAddAnime'
 import { collectionData } from '../constants/collectionData'
 import { AddSquareMultiple } from 'emotion-icons/fluentui-system-filled'
 import { convertArray } from '../utils/convertArray'
 import { convertEnum } from '../utils/convertEnum'
 import { convertDate } from '../utils/convertDate'
-import * as he from 'he'
+import { Collection, getCollectionsWithAnime } from '../utils/collection'
 import { GET_ANIME_DETAIL, createVariables} from '../api/getAnimeDetail'
 
 export default function AnimeDetail() {
   const searchParams = useSearchParams()
-  const [id, setId] = useState<any>(1)
-  const [collections, setCollections] = useState(collectionData)
+  const [id, setId] = useState<number>(-1)
+  const [collections, setCollections] = useState<Collection[]>([])
+  const [openModalAddAnime, setOpenModalAddAnime] = useState(false)
 
   const { loading, data } = useQuery(GET_ANIME_DETAIL, {
     variables: createVariables(id),
   });
 
+  const refreshDataCollection = () => {
+    const collectionList = getCollectionsWithAnime(id)
+    setCollections(collectionList)
+  }
+
+  const toggleOpenModalAddAnime = () => {
+    setOpenModalAddAnime(!openModalAddAnime)
+  }
+
   useEffect(() => {
-    const id = searchParams.get('id') || 1
+    const id = parseInt(searchParams.get('id') || '-1')
     setId(id)
+    const collectionList = getCollectionsWithAnime(id)
+    setCollections(collectionList)
   }, [searchParams]);
 
   return (
@@ -49,9 +63,9 @@ export default function AnimeDetail() {
           {!loading && <div className="anime-detail-card" css={anime.card}>
             <Image src={data?.Media.coverImage.large ?? ''} css={anime.cover} alt="anime banner" className="anime-banner" width={240} height={320} placeholder="blur" blurDataURL='/cover-placeholder.png'/>
             <div className="anime-detail-container" css={anime.detailContainer}>
-              <button className="bulk-add" css={global.primaryButton}>
-                <p className="bulk-add-title" css={global.primaryButtonTitle}>Add to Collection</p>
-                <AddSquareMultiple className="bulk-add-icon" css={global.primaryButtonIcon}/>
+              <button className="add-anime" css={global.primaryButton} onClick={toggleOpenModalAddAnime}>
+                <p className="add-anime-title" css={global.primaryButtonTitle}>Add to Collection</p>
+                <AddSquareMultiple className="add-anime-icon" css={global.primaryButtonIcon}/>
               </button>
               <div className="anime-detail-text" css={anime.detailText}>
                 <p className="anime-detail-desc" css={anime.desc}>{he.decode(data?.Media.description ?? '')}</p>
@@ -116,6 +130,13 @@ export default function AnimeDetail() {
             </div>
           }
         </div>
+          { !loading && data &&
+          <ModalAddAnime 
+            open={openModalAddAnime}
+            toggleOpen={toggleOpenModalAddAnime}
+            refresh={refreshDataCollection}
+            anime={data.Media}
+          /> }
       </div>
       <Footer />
     </div>

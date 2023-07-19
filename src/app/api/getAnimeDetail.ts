@@ -31,9 +31,9 @@ type AnimeDetailVariables = {
   id: number
 };
 
-export function createVariables(id: string): AnimeDetailVariables  {
+export function createVariables(id: number): AnimeDetailVariables  {
   return {
-    id: parseInt(id)
+    id: id
   }
 }
 
