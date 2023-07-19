@@ -26,6 +26,9 @@ export const modal = createStyles({
     borderRadius: '10px',
     maxWidth: '500px',
     alignSelf: 'center',
+    [mq[2]]: {
+      maxWidth: '600px',
+    }
   },
   background: {
     background: colours.black[90],
@@ -48,6 +51,12 @@ export const modal = createStyles({
     fontWeight: '800',
     margin: 0,
     color: colours.white[0],
+    [mq[2]]: {
+      fontSize: '20px',
+    },
+    [mq[5]]: {
+      fontSize: '24px',
+    },
   },
   iconContainer: {
     cursor: 'pointer',
@@ -56,9 +65,36 @@ export const modal = createStyles({
     width: '24px',
     height: '24px',
     color: colours.white[0],
+    [mq[2]]: {
+      width: '28px',
+      height: '28px',
+    },
+    [mq[5]]: {
+      width: '32px',
+      height: '32px',
+    },
   },
   body: {
     width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  bodyTitle: {
+    fontSize: '14px',
+    fontWeight: '400',
+    color: colours.white[0],
+    margin: 0,
+    textAlign: 'center',
+    [mq[2]]: {
+      fontSize: '18px',
+    },
+    [mq[5]]: {
+      fontSize: '22px',
+    },
+  },
+  bodyTitleGreen: {
+    color: colours.primary,
   },
   input: {
     width: '100%',
@@ -74,6 +110,14 @@ export const modal = createStyles({
     '&:focus': {
       borderColor: colours.black[20],
       outline: 'none',
+    },
+    [mq[2]]: {
+      fontSize: '16px',
+      height: '36px',
+    },
+    [mq[5]]: {
+      fontSize: '20px',
+      height: '40px',
     },
   },
   footer: {
@@ -97,6 +141,14 @@ export const modal = createStyles({
     cursor: 'pointer',
     width: '100px',
     height: '24px',
+    [mq[2]]: {
+      width: '120px',
+      height: '28px',
+    },
+    [mq[5]]: {
+      width: '140px',
+      height: '32px',
+    },
   },
   secondaryButton: {
     display: 'flex',
@@ -111,11 +163,25 @@ export const modal = createStyles({
     cursor: 'pointer',
     width: '100px',
     height: '24px',
+    [mq[2]]: {
+      width: '120px',
+      height: '28px',
+    },
+    [mq[5]]: {
+      width: '140px',
+      height: '32px',
+    },
   },
   buttonTitle: {
     fontSize: '12px',
     fontWeight: '800',
     color: colours.white[0],
     margin: 0,
+    [mq[2]]: {
+      fontSize: '16px',
+    },
+    [mq[5]]: {
+      fontSize: '20px',
+    },
   }
 })
