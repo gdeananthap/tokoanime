@@ -4,35 +4,38 @@
 import { jsx } from '@emotion/react'
 import { useSearchParams } from 'next/navigation'
 import React, { useState, useEffect } from 'react'
-import { useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client'
 import { global } from './styles/global'
 import { animeList } from './styles/animeList'
 import Header from './component/header'
 import Footer from './component/footer'
 import AnimeCard from './component/animeCard'
 import Pagination from './component/pagination'
-import { animeData } from './constants/animeData';
 import { AddSquareMultiple } from 'emotion-icons/fluentui-system-filled'
-import { GET_ANIME_LIST, createVariables} from './api/getAnimeList';
+import { GET_ANIME_LIST, createVariables} from './api/getAnimeList'
 
 export default function Home() {
   const searchParams = useSearchParams()
   const [currentPage, setCurrentPage] = useState<any>(1);
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
 
   const { loading, data, refetch } = useQuery(GET_ANIME_LIST, {
     variables: createVariables(currentPage, search),
   });
 
   useEffect(() => {
-    const page = searchParams.get('page') || 1;
+    const page = searchParams.get('page') || 1
+    const search = searchParams.get('search') || ''
     setCurrentPage(page)
+    setSearch(search)
   }, [searchParams]);
 
   return (
     <div className='container' css={global.container}>
       <div className="main-container">
-        <Header />
+        <Header 
+          search={search}
+        />
         <div className="page-container" css={global.pageContainer}>
           <div className="anime-list-header" css={animeList.header}>
             <h1 className="anime-list-title" css={global.h1}>Anime List</h1>
@@ -55,6 +58,7 @@ export default function Home() {
             currentPage={parseInt(currentPage)}
             lastPage={data ? data.Page.pageInfo.lastPage : 1}
             maxLength={7}
+            search={search}
           />}
         </div>
       </div>

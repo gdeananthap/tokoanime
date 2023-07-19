@@ -12,19 +12,21 @@ export type Props = {
   currentPage: number;
   lastPage: number;
   maxLength: number;
+  search: string;
 };
 
 export default function Pagination({
   currentPage,
   lastPage,
   maxLength,
+  search
 }: Props) {
   const router = useRouter()
   const pageNums = createPaginationArray(currentPage, lastPage, maxLength)
 
   const setCurrentPage = (page: number, event: MouseEvent) => {
     event.preventDefault()
-    router.push(`/?page=${page}`)
+    router.push(`/?page=${page}&search=${search}`)
   }
 
   return (

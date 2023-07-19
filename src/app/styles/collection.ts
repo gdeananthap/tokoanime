@@ -7,23 +7,23 @@ import { mq } from './mediaqueries'
 export const collection = createStyles({
   container: {
     display: 'grid',
-    gridTemplateColumns: 'auto auto',
+     gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
     gridGap: '30px',
     marginTop: '24px',
     [mq[0]]: {
-      gridTemplateColumns: 'auto auto auto',
+       gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
     },
     [mq[2]]: {
-      gridTemplateColumns: 'auto auto auto auto',
+       gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
       marginTop: '32px',
     },
     [mq[3]]: {
-      gridTemplateColumns: 'auto auto auto auto auto',
+       gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
       gridGap: '48px',
       marginTop: '40px',
     },
     [mq[5]]: {
-      gridTemplateColumns: 'auto auto auto auto auto auto',
+       gridTemplateColumns: 'repeat(6, minmax(0, 1fr))',
     },
   },
   header: {

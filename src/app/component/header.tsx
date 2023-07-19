@@ -2,16 +2,29 @@
 /** @jsx jsx */
 "use client";
 import { jsx } from '@emotion/react'
-import React, { useState } from 'react'
-import { header } from '../styles/header';
+import React, { useState, KeyboardEvent } from 'react'
+import { useRouter } from 'next/navigation'
+import { header } from '../styles/header'
 import { Menu, Close } from 'emotion-icons/evaicons-solid'
 import Image from 'next/image'
 
-export default function Header() {
+type Props = {
+  search: string;
+};
+
+export default function Header({ search } : Props) {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState(search)
   
   const toggleOpenMenu = () => {
     setOpen(!open)
+  }
+
+  const handleSearch = (e: KeyboardEvent)  => {
+    if( e.key == 'Enter' ){
+      router.push(`/?page=1&search=${searchQuery}`)
+    }
   }
 
   return (
@@ -25,7 +38,7 @@ export default function Header() {
           </div>
         </div>
         <div className="right-container" css={header.right}>
-          <input type="text" name="search" placeholder="Find anime.." css={header.searchbar}/>
+          <input type="text" name="search" placeholder="Find anime.." css={header.searchbar} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={handleSearch}/>
           <div className='menu' css={header.iconContainer} onClick={toggleOpenMenu}>
             { open ? 
               <Close css={header.icon}/>  :
