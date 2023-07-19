@@ -19,7 +19,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState<any>(1);
   const [search, setSearch] = useState<string>('');
 
-  const { loading, data, refetch } = useQuery(GET_ANIME_LIST, {
+  const { loading, data } = useQuery(GET_ANIME_LIST, {
     variables: createVariables(currentPage, search),
   });
 

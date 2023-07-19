@@ -1,4 +1,5 @@
-export function convertEnum(status: string): string {
+export function convertEnum(status: string | undefined): string {
+  if(!status) return '-'
   const lowercaseValue = status.toLowerCase();
   
   if (lowercaseValue.includes('_')) {

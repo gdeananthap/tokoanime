@@ -19,6 +19,7 @@ const month = [
   'Decemner',
 ]
 
-export function convertDate(date: Date): string {
+export function convertDate(date: Date | undefined): string {
+  if( !date ) return '-'
   return `${date.day} ${month[date.month - 1]} ${date.year}`;
 }

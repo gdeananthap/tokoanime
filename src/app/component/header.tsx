@@ -9,7 +9,7 @@ import { Menu, Close } from 'emotion-icons/evaicons-solid'
 import Image from 'next/image'
 
 type Props = {
-  search: string;
+  search?: string;
 };
 
 export default function Header({ search } : Props) {

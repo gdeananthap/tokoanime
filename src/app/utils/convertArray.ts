@@ -1,6 +1,6 @@
-export function convertArray(array: any[]): string {
-  if (array.length === 0) {
-    return '';
+export function convertArray(array: any[] | undefined): string {
+  if (!array || array.length === 0) {
+    return '-';
   }
 
   if (array.length === 1) {

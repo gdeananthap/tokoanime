@@ -2,8 +2,10 @@
 /** @jsx jsx */
 "use client";
 import { jsx } from '@emotion/react'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
+import { useQuery } from '@apollo/client'
 import { global } from '../styles/global'
 import { anime } from '../styles/anime'
 import { collectionList } from '../styles/collectionList'
@@ -17,10 +19,21 @@ import { convertArray } from '../utils/convertArray'
 import { convertEnum } from '../utils/convertEnum'
 import { convertDate } from '../utils/convertDate'
 import * as he from 'he'
+import { GET_ANIME_DETAIL, createVariables} from '../api/getAnimeDetail'
 
 export default function AnimeDetail() {
-  const [animeData, setAnimeData] = useState(animeDetail)
+  const searchParams = useSearchParams()
+  const [id, setId] = useState<any>(1)
   const [collections, setCollections] = useState(collectionData)
+
+  const { loading, data } = useQuery(GET_ANIME_DETAIL, {
+    variables: createVariables(id),
+  });
+
+  useEffect(() => {
+    const id = searchParams.get('id') || 1
+    setId(id)
+  }, [searchParams]);
 
   return (
     <div className='container' css={global.container}>
@@ -28,53 +41,55 @@ export default function AnimeDetail() {
         <Header />
         <div className="page-container" css={global.pageContainer}>
           <div className="anime-list-header" css={anime.header}>
-            <h1 className="anime-list-title" css={global.h1}>{animeData.title.romaji}</h1>
+            <h1 className="anime-list-title" css={global.h1}>{data?.Media.title.romaji}</h1>
           </div>
-          <Image src={animeData.bannerImage} css={anime.banner} alt="anime banner" className="anime-banner" width={240} height={320} placeholder="blur" blurDataURL='/cover-placeholder.png'/>
+          { data?.Media.bannerImage &&
+            <Image src={data?.Media.bannerImage} css={anime.banner} alt="anime banner" className="anime-banner" width={240} height={320} placeholder="blur" blurDataURL='/cover-placeholder.png'/>
+          }
           <div className="anime-detail-card" css={anime.card}>
-            <Image src={animeData.coverImage.large} css={anime.cover} alt="anime banner" className="anime-banner" width={240} height={320} placeholder="blur" blurDataURL='/cover-placeholder.png'/>
+            <Image src={data?.Media.coverImage.large ?? ''} css={anime.cover} alt="anime banner" className="anime-banner" width={240} height={320} placeholder="blur" blurDataURL='/cover-placeholder.png'/>
             <div className="anime-detail-container" css={anime.detailContainer}>
               <button className="bulk-add" css={global.primaryButton}>
                 <p className="bulk-add-title" css={global.primaryButtonTitle}>Add to Collection</p>
                 <AddSquareMultiple className="bulk-add-icon" css={global.primaryButtonIcon}/>
               </button>
               <div className="anime-detail-text" css={anime.detailText}>
-                <p className="anime-detail-desc" css={anime.desc}>{he.decode(animeData.description)}</p>
+                <p className="anime-detail-desc" css={anime.desc}>{he.decode(data?.Media.description ?? '')}</p>
                 <div className="anime-detail-more" css={anime.detailMore}>
                   <div className="anime-detail-left" css={anime.detailLeft}>
                     <div className="anime-detail-text-container" css={anime.detailTextContainer}>
                       <p className="anime-detail-text-label" css={anime.detailLabel}>Synonyms:</p>
-                      <p className="anime-detail-text-value" css={anime.detailValue}>{convertArray(animeData.synonyms)}</p>
+                      <p className="anime-detail-text-value" css={anime.detailValue}>{convertArray(data?.Media.synonyms)}</p>
                     </div>
                     <div className="anime-detail-text-container" css={anime.detailTextContainer}>
                       <p className="anime-detail-text-label" css={anime.detailLabel}>Genre:</p>
-                      <p className="anime-detail-text-value" css={anime.detailValue}>{convertArray(animeData.genres)}</p>
+                      <p className="anime-detail-text-value" css={anime.detailValue}>{convertArray(data?.Media.genres)}</p>
                     </div>
                     <div className="anime-detail-text-container" css={anime.detailTextContainer}>
                       <p className="anime-detail-text-label" css={anime.detailLabel}>Rating:</p>
-                      <p className="anime-detail-text-value" css={anime.detailValue}>{animeData.averageScore}</p>
+                      <p className="anime-detail-text-value" css={anime.detailValue}>{data?.Media.averageScore ?? '-'}</p>
                     </div>
                     <div className="anime-detail-text-container" css={anime.detailTextContainer}>
-                      <p className="anime-detail-text-label" css={anime.detailLabel}>Genres:</p>
-                      <p className="anime-detail-text-value" css={anime.detailValue}>{convertEnum(animeData.status)}</p>
+                      <p className="anime-detail-text-label" css={anime.detailLabel}>Status:</p>
+                      <p className="anime-detail-text-value" css={anime.detailValue}>{convertEnum(data?.Media.status) }</p>
                     </div>
                   </div>
                   <div className="anime-detail-right" css={anime.detailRight}>
                     <div className="anime-detail-text-container" css={anime.detailTextContainer}>
                       <p className="anime-detail-text-label" css={anime.detailLabel}>Total episodes:</p>
-                      <p className="anime-detail-text-value" css={anime.detailValue}>{`${animeData.episodes} episodes`}</p>
+                      <p className="anime-detail-text-value" css={anime.detailValue}>{`${data?.Media.episodes ? `${data?.Media.episodes} episodes` : '-'}`}</p>
                     </div>
                     <div className="anime-detail-text-container" css={anime.detailTextContainer}>
                       <p className="anime-detail-text-label" css={anime.detailLabel}>Duration per episode:</p>
-                      <p className="anime-detail-text-value" css={anime.detailValue}>{`${animeData.duration} minutes`}</p>
+                      <p className="anime-detail-text-value" css={anime.detailValue}>{`${data?.Media.duration ? `${data?.Media.duration} minutes` : '-'}`}</p>
                     </div>
                     <div className="anime-detail-text-container" css={anime.detailTextContainer}>
                       <p className="anime-detail-text-label" css={anime.detailLabel}>Season:</p>
-                      <p className="anime-detail-text-value" css={anime.detailValue}>{`${convertEnum(animeData.season)}, ${animeData.seasonYear}`}</p>
+                      <p className="anime-detail-text-value" css={anime.detailValue}>{`${data?.Media.season && data?.Media.seasonYear ? `${convertEnum(data?.Media.season)}, ${data?.Media.seasonYear}` : '-'}`}</p>
                     </div>
                     <div className="anime-detail-text-container" css={anime.detailTextContainer}>
                       <p className="anime-detail-text-label" css={anime.detailLabel}>Start airing:</p>
-                      <p className="anime-detail-text-value" css={anime.detailValue}>{convertDate(animeData.startDate)}</p>
+                      <p className="anime-detail-text-value" css={anime.detailValue}>{convertDate(data?.Media.startDate)}</p>
                     </div>
                     </div>
                 </div>
