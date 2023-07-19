@@ -8,16 +8,37 @@ import { collectionList } from '../styles/collectionList'
 import Header from '../component/header'
 import Footer from '../component/footer'
 import ModalName from '../component/modalName'
+import ModalRemove from '../component/modalRemove';
 import CollectionCard from '../component/collectionCard'
 import { FolderAdd } from 'emotion-icons/fluentui-system-filled'
+import { Collection } from '../utils/collection';
 
 export default function Home() {
   const [data, setData] = useState([])
-  const [open, setOpen] = useState(false)
-
-  const toggleOpen = () => {
-    setOpen(!open)
+  const placeholderCollectionToRemove = {
+    id: -1,
+    title: 'dummy',
+    cover: '',
   }
+  const [collectionToRemove, setCollectionToRemove] = useState(placeholderCollectionToRemove)
+  const [openModalName, setOpenModalName] = useState(false)
+  const [openModalRemove, setOpenModalRemove] = useState(false)
+
+  const toggleOpenModalName = () => {
+    setOpenModalName(!openModalName)
+  }
+
+  const toggleOpenModalRemove = () => {
+    if(openModalRemove) setCollectionToRemove(placeholderCollectionToRemove)
+    setOpenModalRemove(!openModalRemove)
+  }
+
+  const clickModalRemove = (collection : Collection) => {
+    console.log(collection)
+    setCollectionToRemove(collection)
+    toggleOpenModalRemove()
+  }
+
   const refreshData = () => {
     const collection = JSON.parse(localStorage.getItem('collectionList') || '[]')
     setData(collection)
@@ -35,7 +56,7 @@ export default function Home() {
         <div className="page-container" css={global.pageContainer}>
           <div className="collection-list-header" css={collectionList.header}>
             <h1 className="collection-list-title" css={global.h1}>My Collections</h1>
-            <button className="create-collection" css={global.primaryButton} onClick={toggleOpen}>
+            <button className="create-collection" css={global.primaryButton} onClick={toggleOpenModalName}>
               <p className="create-collection-title" css={global.primaryButtonTitle}>Create New Collection</p>
               <FolderAdd className="create-collection-icon" css={global.primaryButtonIcon}/>
             </button>
@@ -47,6 +68,7 @@ export default function Home() {
                 showRemove={true}
                 index={index}
                 key={index}
+                setRemoveCollection={() => clickModalRemove(collection)}
               />
             ))}
           </div>
@@ -58,9 +80,15 @@ export default function Home() {
           }
         </div>
         <ModalName 
-          open={open}
-          toggleOpen={toggleOpen}
+          open={openModalName}
+          toggleOpen={toggleOpenModalName}
           refresh={refreshData}
+        />
+        <ModalRemove
+          open={openModalRemove}
+          toggleOpen={toggleOpenModalRemove}
+          refresh={refreshData}
+          collection={collectionToRemove}
         />
       </div>
       <Footer />
