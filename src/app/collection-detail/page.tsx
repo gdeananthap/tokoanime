@@ -2,19 +2,61 @@
 /** @jsx jsx */
 "use client";
 import { jsx } from '@emotion/react'
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import React, { useState, useEffect, useCallback } from 'react'
 import { global } from '../styles/global'
 import { animeList } from '../styles/animeList'
 import Header from '../component/header'
 import Footer from '../component/footer'
 import AnimeCard from '../component/animeCard'
-import { collectionDetail, collectionDetailEmpty} from '../constants/collectionData';
+import ModalName from '../component/modalName'
 import { Edit } from 'emotion-icons/material'
+import { getCollectionById } from '../utils/collection'
 
 export default function CollectionDetail() {
   const router = useRouter()
-  const [data, setData] = useState(collectionDetailEmpty)
+  const searchParams = useSearchParams()
+  const [dataCollection, setDataCollection] = useState({id: 1, title: 'Error', cover: ''})
+  const [error, setError] = useState(true)
+  const [dataAnime, setDataAnime] = useState([])
+  const [collectionId, setCollectionId] = useState(-1)
+  const [loading, setLoading] = useState(false)
+  const [openModalEdit, setOpenModalEdit] = useState(false)
+  const [openModalRemove, setOpenModalRemove] = useState(false)
+
+  const toggleOpenModalEdit = () => {
+    setOpenModalEdit(!openModalEdit)
+  }
+
+  // const toggleOpenModalRemove = () => {
+  //   setOpenModalRemove(!openModalRemove)
+  // }
+
+  // const clickModalRemove = (collection : Collection) => {
+  //   setCollectionToRemove(collection)
+  //   toggleOpenModalRemove()
+  // }
+
+  const refreshData = useCallback(() => {
+    setLoading(true)
+    const collection = getCollectionById(collectionId)
+    if(collection) {
+      setDataCollection(collection)
+      const animeList = JSON.parse(localStorage.getItem(`collection-${collectionId}`) || '[]')
+      setDataAnime(animeList)
+      setError(false)
+    } else {
+      setError(true)
+    }
+    setLoading(false)
+  }, [collectionId])
+
+  useEffect(() => {
+    const id = parseInt(searchParams.get('id') || '-1')
+    setCollectionId(id)
+    refreshData()
+  }, [refreshData, searchParams]);
+
 
   const goToAnimeList = () => {
     router.push('/')
@@ -24,29 +66,46 @@ export default function CollectionDetail() {
     <div className='container' css={global.container}>
       <div className="main-container">
         <Header />
-        <div className="page-container" css={global.pageContainer}>
-          <div className="anime-list-header" css={animeList.header}>
-            <h1 className="anime-list-title" css={global.h1}>{data.title}</h1>
-            <button className="bulk-add" css={global.primaryButton}>
-              <p className="bulk-add-title" css={global.primaryButtonTitle}>Edit</p>
-              <Edit className="bulk-add-icon" css={global.primaryButtonIcon}/>
-            </button>
-          </div>
-          <div className="anime-list-container" css={animeList.container}>
-            { data && data.animeList && data.animeList.length > 0 && data.animeList.map((anime, index) => (
-              <AnimeCard 
-                anime={anime}
-                key={index}
-              />
-            ))}
-          </div>
-          { data && data.animeList.length <= 0 &&
-            <div className="error-page-container" css={global.errorContainer}>
-              <h1 className="errorTitle" css={global.errorTitle}>No Anime Found</h1>
-              <p className="errorTitle" css={global.errorDesc}><a className="clickable" css={global.errorDescClick} onClick={goToAnimeList}>Explore list of anime </a>to get started</p>
+        { !error &&
+          <div className="page-container" css={global.pageContainer}>
+            <div className="anime-list-header" css={animeList.header}>
+              <h1 className="anime-list-title" css={global.h1}>{dataCollection.title}</h1>
+              <button className="bulk-add" css={global.primaryButton} onClick={toggleOpenModalEdit}>
+                <p className="bulk-add-title" css={global.primaryButtonTitle}>Edit</p>
+                <Edit className="bulk-add-icon" css={global.primaryButtonIcon}/>
+              </button>
             </div>
-          }
-        </div>
+            <div className="anime-list-container" css={animeList.container}>
+              { dataAnime && dataAnime.length > 0 && dataAnime.map((anime, index) => (
+                <AnimeCard 
+                  anime={anime}
+                  key={index}
+                />
+              ))}
+            </div>
+            { dataAnime && dataAnime.length <= 0 &&
+              <div className="error-page-container" css={global.errorContainer}>
+                <h1 className="errorTitle" css={global.errorTitle}>No Anime Found</h1>
+                <p className="errorTitle" css={global.errorDesc}><a className="clickable" css={global.errorDescClick} onClick={goToAnimeList}>Explore list of anime </a>to get started</p>
+              </div>
+            }
+          </div> 
+        }
+        { !error && !loading && 
+        <ModalName 
+          open={openModalEdit}
+          toggleOpen={toggleOpenModalEdit}
+          refresh={refreshData}
+          collectionId={dataCollection.id}
+          collectionName={dataCollection.title}
+        /> }
+        { error &&
+          <div className="page-container" css={global.pageContainer}>
+            <div className="error-page-container" css={global.errorContainer}>
+              <h1 className="errorTitle" css={global.errorTitle}>Collection Not Found</h1>
+            </div>
+          </div>
+        }
       </div>
       <Footer />
     </div>

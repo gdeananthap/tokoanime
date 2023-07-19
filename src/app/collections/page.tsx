@@ -81,10 +81,12 @@ export default function Home() {
             </div>
           }
         </div>
-        { !loading && <ModalName 
+        { !loading && 
+        <ModalName 
           open={openModalName}
           toggleOpen={toggleOpenModalName}
           refresh={refreshData}
+          collectionId={-1}
         /> }
         { !loading && <ModalRemove
           open={openModalRemove}
