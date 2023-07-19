@@ -77,8 +77,10 @@ export const modal = createStyles({
   body: {
     width: '100%',
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: '4px',
   },
   bodyTitle: {
     fontSize: '14px',
@@ -95,6 +97,19 @@ export const modal = createStyles({
   },
   bodyTitleGreen: {
     color: colours.primary,
+  },
+  errorMessage: {
+    fontSize: '10px',
+    fontWeight: '400',
+    color: colours.error,
+    margin: 0,
+    textAlign: 'left',
+    [mq[2]]: {
+      fontSize: '14px',
+    },
+    [mq[5]]: {
+      fontSize: '18px',
+    },
   },
   input: {
     width: '100%',
@@ -141,6 +156,11 @@ export const modal = createStyles({
     cursor: 'pointer',
     width: '100px',
     height: '24px',
+    '&:disabled': {
+      backgroundColor: colours.black[0],
+      borderColor: colours.black[0],
+      cursor: 'default',
+    },
     [mq[2]]: {
       width: '120px',
       height: '28px',
