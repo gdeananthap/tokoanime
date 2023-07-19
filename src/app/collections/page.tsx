@@ -7,12 +7,26 @@ import { global } from '../styles/global'
 import { collectionList } from '../styles/collectionList'
 import Header from '../component/header'
 import Footer from '../component/footer'
+import ModalName from '../component/modalName'
 import CollectionCard from '../component/collectionCard'
-import { collectionData } from '../constants/collectionData'
 import { FolderAdd } from 'emotion-icons/fluentui-system-filled'
 
 export default function Home() {
-  const [data, setData] = useState(collectionData)
+  const [data, setData] = useState([])
+  const [open, setOpen] = useState(false)
+
+  const toggleOpen = () => {
+    setOpen(!open)
+  }
+  const refreshData = () => {
+    const collection = JSON.parse(localStorage.getItem('collectionList') || '[]')
+    setData(collection)
+  }
+
+  useEffect(() => {
+    const collection = JSON.parse(localStorage.getItem('collectionList') || '[]')
+    setData(collection)
+  }, []);
 
   return (
     <div className='container' css={global.container}>
@@ -21,9 +35,9 @@ export default function Home() {
         <div className="page-container" css={global.pageContainer}>
           <div className="collection-list-header" css={collectionList.header}>
             <h1 className="collection-list-title" css={global.h1}>My Collections</h1>
-            <button className="bulk-add" css={global.primaryButton}>
-              <p className="bulk-add-title" css={global.primaryButtonTitle}>Create New Collection</p>
-              <FolderAdd className="bulk-add-icon" css={global.primaryButtonIcon}/>
+            <button className="create-collection" css={global.primaryButton} onClick={toggleOpen}>
+              <p className="create-collection-title" css={global.primaryButtonTitle}>Create New Collection</p>
+              <FolderAdd className="create-collection-icon" css={global.primaryButtonIcon}/>
             </button>
           </div>
           <div className="collection-list-container" css={collectionList.container}>
@@ -43,6 +57,11 @@ export default function Home() {
             </div>
           }
         </div>
+        <ModalName 
+          open={open}
+          toggleOpen={toggleOpen}
+          refresh={refreshData}
+        />
       </div>
       <Footer />
     </div>
