@@ -29,6 +29,7 @@ export default function ModalAddAnime({
   const addAnime = (collectionId: number) => {
     addAnimeToCollection(collectionId, anime)
     refresh()
+    toggleOpen()
   }
 
   const generateCollection = () => {
