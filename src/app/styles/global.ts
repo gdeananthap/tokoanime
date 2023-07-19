@@ -1,8 +1,14 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
+import { keyframes } from '@emotion/react'
 import { createStyles } from './createStyles'
 import { colours } from './colours'
 import { mq } from './mediaqueries'
+
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`
 
 export const global = createStyles({
   body: {
@@ -46,6 +52,24 @@ export const global = createStyles({
     alignItems: 'center',
     width: '100%',
     marginTop: '24px',
+  },
+  loading: {
+    borderWidth: '8px',
+    borderStyle: 'solid',
+    borderColor: colours.black[0],
+    borderTopColor: colours.primary,
+    borderRadius: '50%',
+    width: '60px',
+    height: '60px',
+    animation: `${spin} 2s linear infinite`,
+    marginTop: '24px',
+    alignSelf: 'center',
+    [mq[2]]: {
+      borderWidth: '16px',
+      width: '120px',
+      height: '120px',
+      marginTop: '40px',
+    }
   },
   h1: {
     fontSize: '20px',

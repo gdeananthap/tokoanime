@@ -4,6 +4,7 @@
 import { jsx } from '@emotion/react'
 import { useSearchParams } from 'next/navigation'
 import React, { useState, useEffect } from 'react'
+import { useQuery } from '@apollo/client';
 import { global } from './styles/global'
 import { animeList } from './styles/animeList'
 import Header from './component/header'
@@ -12,17 +13,21 @@ import AnimeCard from './component/animeCard'
 import Pagination from './component/pagination'
 import { animeData } from './constants/animeData';
 import { AddSquareMultiple } from 'emotion-icons/fluentui-system-filled'
+import { GET_ANIME_LIST, createVariables} from './api/getAnimeList';
 
 export default function Home() {
   const searchParams = useSearchParams()
-  const [data, setData] = useState(animeData)
   const [currentPage, setCurrentPage] = useState<any>(1);
+  const [search, setSearch] = useState<string>("");
+
+  const { loading, data, refetch } = useQuery(GET_ANIME_LIST, {
+    variables: createVariables(currentPage, search),
+  });
 
   useEffect(() => {
     const page = searchParams.get('page') || 1;
     setCurrentPage(page)
   }, [searchParams]);
-
 
   return (
     <div className='container' css={global.container}>
@@ -36,19 +41,21 @@ export default function Home() {
               <AddSquareMultiple className="bulk-add-icon" css={global.primaryButtonIcon}/>
             </button>
           </div>
-          <div className="anime-list-container" css={animeList.container}>
-            { data && data.page.media && data.page.media.length > 0 && data.page.media.map((anime, index) => (
+          { loading && <div className="loader" css={global.loading}></div> }
+          { !loading && <div className="anime-list-container" css={animeList.container}>
+            {  data && data.Page.media && data.Page.media.length > 0 && data.Page.media.map((anime, index) => (
               <AnimeCard 
                 anime={anime}
                 key={index}
               />
             ))}
-          </div>
+          </div>}
+          {!loading && 
           <Pagination
             currentPage={parseInt(currentPage)}
-            lastPage={animeData.page.pageInfo.lastPage}
+            lastPage={data ? data.Page.pageInfo.lastPage : 1}
             maxLength={7}
-          />
+          />}
         </div>
       </div>
       <Footer />
