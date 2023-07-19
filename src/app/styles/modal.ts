@@ -118,9 +118,11 @@ export const modal = createStyles({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     gap: '8px',
+    minHeight: '150px',
     maxHeight: '200px',
     width: '100%',
     [mq[2]]: {
+      minHeight: '200px',
       maxHeight: '280px',
       gap: '16px',
     },

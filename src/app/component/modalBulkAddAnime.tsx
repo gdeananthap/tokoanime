@@ -49,7 +49,7 @@ export default function ModalBulkAddAnime({
 
   useEffect(() => {
     refresh()
-  }, [])
+  }, [open])
 
   return (
     <div>
