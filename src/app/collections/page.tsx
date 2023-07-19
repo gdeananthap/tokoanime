@@ -16,28 +16,40 @@ import { Collection } from '../utils/collection';
 export default function Home() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
-  const placeholderCollectionToRemove = {
+  const placeholderCollection = {
     id: -1,
     title: 'dummy',
     cover: '',
     animeList: [],
   }
-  const [collectionToRemove, setCollectionToRemove] = useState<Collection>(placeholderCollectionToRemove)
+  const [collectionToRemove, setCollectionToRemove] = useState<Collection>(placeholderCollection)
+  const [collectionToUpdate, setCollectionToUpdate] = useState<Collection>(placeholderCollection)
   const [openModalName, setOpenModalName] = useState(false)
   const [openModalRemove, setOpenModalRemove] = useState(false)
+  const [openModalEdit, setOpenModalEdit] = useState(false)
 
   const toggleOpenModalName = () => {
     setOpenModalName(!openModalName)
   }
 
   const toggleOpenModalRemove = () => {
-    if(openModalRemove) setCollectionToRemove(placeholderCollectionToRemove)
+    if(openModalRemove) setCollectionToRemove(placeholderCollection)
     setOpenModalRemove(!openModalRemove)
+  }
+
+  const toggleOpenModalEdit = () => {
+    if(openModalEdit) setCollectionToUpdate(placeholderCollection)
+    setOpenModalEdit(!openModalEdit)
   }
 
   const clickModalRemove = (collection : Collection) => {
     setCollectionToRemove(collection)
     toggleOpenModalRemove()
+  }
+
+  const clickModalEdit = (collection : Collection) => {
+    setCollectionToUpdate(collection)
+    toggleOpenModalEdit()
   }
 
   const refreshData = () => {
@@ -69,9 +81,10 @@ export default function Home() {
               <CollectionCard 
                 collection={collection}
                 showRemove={true}
-                index={index}
+                showEdit={true}
                 key={index}
                 setRemoveCollection={() => clickModalRemove(collection)}
+                setEditCollection={() => clickModalEdit(collection)}
               />
             ))}
           </div>}
@@ -95,6 +108,14 @@ export default function Home() {
           refresh={refreshData}
           collection={collectionToRemove}
         />}
+        { !loading && 
+        <ModalName 
+          open={openModalEdit}
+          toggleOpen={toggleOpenModalEdit}
+          refresh={refreshData}
+          collectionId={collectionToUpdate.id}
+          collectionName={collectionToUpdate.title}
+        /> }
       </div>
       <Footer />
     </div>

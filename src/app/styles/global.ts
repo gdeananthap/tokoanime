@@ -176,6 +176,25 @@ export const global = createStyles({
       padding: '8px 16px',
     },
   },
+  primaryButtonSmall: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: '4px',
+    backgroundColor: colours.primary,
+    padding: '4px',
+    border: '1px solid',
+    borderColor: colours.primary,
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginBottom: '8px',
+    [mq[2]]: {
+      padding: '4px 8px',
+    },
+    [mq[5]]: {
+      padding: '8px 16px',
+    },
+  },
   primaryButtonTitle: {
     fontFamily: `${nunito_sans.style.fontFamily}`,
     fontSize: '10px',
@@ -187,6 +206,22 @@ export const global = createStyles({
     },
     [mq[2]]: {
       fontSize: '16px',
+    }
+  },
+  primaryButtonTitleSmall: {
+    fontFamily: `${nunito_sans.style.fontFamily}`,
+    fontSize: '6px',
+    fontWeight: '800',
+    color: colours.white[0],
+    margin: 0,
+    [mq[0]]: {
+      fontSize: '8px',
+    },
+    [mq[2]]: {
+      fontSize: '10px',
+    },
+    [mq[5]]: {
+      fontSize: '14px',
     }
   },
   primaryButtonIcon: {
@@ -201,5 +236,18 @@ export const global = createStyles({
       height: '20px',
       width: '20px',
     }
+  },
+  primaryButtonIconSmall: {
+    height: '8px',
+    width: '8px',
+    color: colours.white[0],
+    [mq[2]]: {
+      height: '10px',
+      width: '10px',
+    },
+    [mq[5]]: {
+      height: '14px',
+      width: '14px',
+    },
   }
 })

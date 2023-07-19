@@ -87,7 +87,7 @@ export default function ModalName({
               <button disabled={Boolean(error)} className="create-button" css={modal.primaryButton} onClick={collectionName ? edit : create}>
                 <p className="create-button-title" css={modal.buttonTitle}>{collectionName ? 'Save' : 'Create'}</p>
               </button>
-              <button className="cancel" css={modal.secondaryButton} onClick={toggleOpen}>
+              <button className="cancel" css={modal.secondaryButton} onClick={closeModal}>
                 <p className="create-button-title" css={modal.buttonTitle}>Cancel</p>
               </button>
             </div>

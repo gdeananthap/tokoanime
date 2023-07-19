@@ -14,7 +14,6 @@ import Header from '../component/header'
 import Footer from '../component/footer'
 import CollectionCard from '../component/collectionCard'
 import ModalAddAnime from '../component/modalAddAnime'
-import { collectionData } from '../constants/collectionData'
 import { AddSquareMultiple } from 'emotion-icons/fluentui-system-filled'
 import { convertArray } from '../utils/convertArray'
 import { convertEnum } from '../utils/convertEnum'
@@ -117,9 +116,10 @@ export default function AnimeDetail() {
                 <CollectionCard 
                   collection={collection}
                   showRemove={false}
-                  index={index}
+                  showEdit={false}
                   key={index}
                   setRemoveCollection={() => {}}
+                  setEditCollection={() => {}}
                 />
               ))}
             </div>

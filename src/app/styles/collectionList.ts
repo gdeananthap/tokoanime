@@ -68,6 +68,35 @@ export const collectionList = createStyles({
       height: '400px',
     },
   },
+  cardEdit: {
+    position: 'relative',
+    width: '100%',
+    height: '210px',
+    borderRadius: '10px',
+    cursor: 'pointer',
+    border: '1px solid',
+    borderColor: colours.black[20],
+    backgroundColor: colours.black[50],
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    [mq[0]]: {
+      height: '190px',
+    },
+    [mq[2]]: {
+      height: '270px',
+    },
+    [mq[3]]: {
+      height: '310px',
+    },
+    [mq[4]]: {
+      height: '350px',
+    },
+    [mq[5]]: {
+      height: '430px',
+    },
+  },
   cardButton: {
     position: 'absolute',
     width: '20px',
@@ -124,22 +153,22 @@ export const collectionList = createStyles({
     },
   },
   cardLabel: {
-    maxWidth: 'calc(100% - 16px)',
+    maxWidth: 'calc(100% - 24px)',
     height: '50px',
     padding: '21px 8px 0px',
     bottom: 0,
     [mq[2]]: {
-      maxWidth: 'calc(100% - 24px)',
+      maxWidth: 'calc(100% - 32px)',
       height: '70px',
       padding: '24px 12px 0px',
     },
     [mq[3]]: {
-      maxWidth: 'calc(100% - 28px)',
+      maxWidth: 'calc(100% - 36px)',
       height: '80px',
       padding: '36px 14px 0px',
     },
     [mq[5]]: {
-      maxWidth: 'calc(100% - 32px)',
+      maxWidth: 'calc(100% - 40px)',
       height: '80px',
       padding: '40px 16px 0px',
     },
