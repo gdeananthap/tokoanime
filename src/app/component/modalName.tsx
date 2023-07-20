@@ -50,9 +50,9 @@ export default function ModalName({
     setName(name)
     if (isCollectionNameUnique(name)) {
       if (isCollectionNameHasSpecialChar(name)) {
-        setError('')
-      } else {
         setError('Collection name should not have special character')
+      } else {
+        setError('')
       }
     } else {
       if (collectionName && name === collectionName) {

@@ -57,9 +57,9 @@ export function isCollectionNameHasSpecialChar(name: string): boolean {
   const regex =  /[!@#$%^&*(),.?":{}|<>]/
   const hasSpecialChars = regex.test(name)
   if (hasSpecialChars) {
-    return false
-  } else {
     return true
+  } else {
+    return false
   }
 }
 
