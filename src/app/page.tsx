@@ -13,7 +13,7 @@ import AnimeCard from './component/animeCard'
 import Pagination from './component/pagination'
 import { AddSquareMultiple } from 'emotion-icons/fluentui-system-filled'
 import { GET_ANIME_LIST, createVariables} from './api/getAnimeList'
-import { addAnimeToAnimeList } from './utils/anime';
+import { Anime, addAnimeToAnimeList } from './utils/anime';
 import ModalBulkAddAnime from './component/modalBulkAddAnime';
 
 export default function Home() {
@@ -21,6 +21,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState<any>(1);
   const [search, setSearch] = useState<string>('');
   const [openModalBulk, setOpenModalBulk] = useState<boolean>(false);
+  const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
 
   const { loading, data } = useQuery(GET_ANIME_LIST, {
     variables: createVariables(currentPage, search),
@@ -28,6 +29,14 @@ export default function Home() {
 
   const toggleOpenModalBulk = () => {
     setOpenModalBulk(!openModalBulk)
+  }
+
+  const addAnimeToCart = (anime: Anime) => {
+    addAnimeToAnimeList(anime)
+    console.log(anime)
+    setShowSnackbar(true)
+    console.log(showSnackbar)
+    setTimeout(() => setShowSnackbar(false), 3000);
   }
 
   useEffect(() => {
@@ -58,7 +67,7 @@ export default function Home() {
                 anime={anime}
                 key={index}
                 showRemove={false}
-                setAddAnime={()=>{addAnimeToAnimeList(anime)}}
+                setAddAnime={()=>{addAnimeToCart(anime)}}
                 setRemoveAnime={()=>{}}
               />
             ))}
@@ -76,6 +85,7 @@ export default function Home() {
           open={openModalBulk}
           toggleOpen={toggleOpenModalBulk}
         /> }
+        <div className='snackbar' css={showSnackbar ? global.snackbarShow : global.snackbarHidden}>Succesfully add anime to collection cart</div>
       </div>
       <Footer />
     </div>

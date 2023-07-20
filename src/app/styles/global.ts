@@ -11,6 +11,26 @@ const spin = keyframes`
   100% { transform: rotate(360deg); }
 `
 
+const webkitFadeIn = keyframes`
+  from {top: 0; opacity: 0;}
+  to {top: 60px; opacity: 1;}
+`
+
+const webkitFadeOut = keyframes`
+  from {top: 60px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+`
+
+const fadeIn = keyframes`
+  from {top: 0; opacity: 0;}
+  to {top: 60px; opacity: 1;}
+`
+
+const fadeOut = keyframes`
+  from {top: 60px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+`
+
 export const global = createStyles({
   body: {
     margin: 0,
@@ -267,6 +287,50 @@ export const global = createStyles({
     [mq[5]]: {
       height: '14px',
       width: '14px',
+    },
+  },
+  snackbarHidden: {
+    visibility: 'hidden',
+    width: '250px',
+    backgroundColor: colours.primary,
+    color: colours.white[0],
+    textAlign: 'center',
+    borderRadius: '10px',
+    padding: '8px',
+    position: 'fixed',
+    zIndex: 1,
+    margin: '0 auto',
+    top: '60px',
+    left: 0,
+    right: 0,
+    fontSize: '12px',
+    fontWeight: '800',
+    [mq[2]]: {
+      width: '350px',
+      fontSize: '16px',
+    },
+  },
+  snackbarShow: {
+    visibility: 'visible',
+    WebkitAnimation: `${webkitFadeIn} 0.5s, ${webkitFadeOut} 0.5s 2.5s`,
+    animation: `${fadeIn} 0.5s, ${fadeOut} 0.5s 2.5s`,
+    width: '250px',
+    backgroundColor: colours.primary,
+    color: colours.white[0],
+    textAlign: 'center',
+    borderRadius: '10px',
+    padding: '8px',
+    position: 'fixed',
+    zIndex: 1,
+    margin: '0 auto',
+    top: '60px',
+    left: 0,
+    right: 0,
+    fontSize: '12px',
+    fontWeight: '800',
+    [mq[2]]: {
+      width: '350px',
+      fontSize: '16px',
     },
   }
 })
