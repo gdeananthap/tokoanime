@@ -1,35 +1,93 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<br>
 
-First, run the development server:
+![screenshot](/public/logo.svg)
+<h1 align="center">
+  Toko Anime
+  <br>
+</h1>
+
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#design">Download</a> •
+  <a href="#credits">Credits</a>
+</p>
+
+![screenshot](public/tokoanime.gif)
+
+## Features
+
+* Anime List Page
+  - Users can see 10 anime on each page with anime title and anime cover
+  - Users can go to the anime detail page by clicking each anime item
+  - User can select multiple anime to be added into a collection via bulk add modal. Users can click the add button on the top right anime item and open the modal by clicking "Collection Cart"
+* Anime Detail Page
+  - Users can see anime info on this page, including:
+    - Title
+    - Banner Image
+    - Cover Image
+    - Description
+    - Genres
+    - Rating
+    - Status
+    - Total Episodes
+    - Duration per episode
+    - Season
+    - Start airing date
+  - Users can add anime to multiple collection
+  - Users can see all of their collection that includes this anime
+* Collection List page
+  - Users can see all collection that already added.
+  - Users can remove collection by clicking "Remove" button on the collection card and confirm the removal via Confirmation modal
+  - Users can add collection by clicking "Add a Collection" button on the collection card and fill the collection name that should unique and doesn't have special character via Add a Collection modal
+  - Users can edit collection name by clicking "Edit" button on the collection card and fill the new collection name that should unique and doesn't have special character via Edit Collection Name modal
+* Collection Detail Anime
+  -  Users can see list of anime that already added to the collection.
+  -  Users can remove anime from Collection Detail page by clicking "Remove" button on the top right of anime item and confirm the removal via Confirmation modal
+  -  Users can edit collection name by clicking "Edit" button on the top right of the page and fill the new collection name that should unique and doesn't have special character via Edit Collection Name modal
+
+## How To Use
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# Clone this repository
+$ git clone https://github.com/gdeananthap/tokoanime.git
+
+# Go into the repository
+$ cd tokoanime
+
+# Install dependencies
+$ npm install
+
+# Run the app in development server
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This application also already deloyed on [Vercel](https://toko-anime.vercel.app/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Design
 
-## Learn More
+The design of this web app made in Figma, you can see it on this [link](https://www.figma.com/file/PetHN9OjkVlGLtHRYPmMnY/Tokopedia-Technical-Test?type=design&node-id=1%3A2&mode=design&t=2R1Y6rE5DlLdDmS9-1).
 
-To learn more about Next.js, take a look at the following resources:
+## Credits
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Framework, Library, or Application used during the development:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [Next.js](https://nextjs.org/)
+- [Node.js](https://nodejs.org/)
+- [Emotion](https://emotion.sh/docs/introduction)
+- [Apollo Client](https://www.apollographql.com/docs/react/)
+- [GraphQl](https://graphql.org/)
+- [Anilist](https://anilist.co/)
+- [Vercel](https://vercel.com/docs)
+- [Figma](https://www.figma.com/developers)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> GitHub [@gdeananthap](https://github.com/gdeananthap) &nbsp;&middot;&nbsp;
+> LinkedIn [Gde Anantha Priharsena](https://www.linkedin.com/in/gdeananthap/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# tokoanime
